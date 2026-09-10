@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product readiness — section template (dummy data)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink:#101828; --muted:#667085; --line:#e7e9f0; --soft:#f6f7fb; --paper:#fff;
+      --blue:#3457f1; --blue-2:#6c7cff; --green:#16a36a; --amber:#e9a23b; --red:#d94b5c;
+      --shadow:0 12px 32px rgba(30,35,90,.08); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;padding:40px 0;color:var(--ink);background:var(--soft);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.45}
+    .wrap{width:min(1180px,calc(100% - 40px));margin:0 auto}
+    .card{background:var(--paper);border:1px solid rgba(231,233,240,.9);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}
+    .section-head h2{margin:0;font-size:22px;letter-spacing:-.02em}
+    .section-head p{margin:4px 0 0;color:var(--muted)}
+    .matrix-card{overflow:hidden}
+    .matrix-note{padding:14px 18px;color:var(--muted);background:#fafaff;border-top:1px solid var(--line);font-size:12px}
+    .table-scroll{overflow-x:auto}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle;white-space:nowrap}
+    th{color:var(--muted);background:#fbfbfd;font-size:10px;letter-spacing:.05em;text-transform:uppercase}
+    td:first-child,th:first-child{text-align:left;font-weight:800}
+    tr:last-child td{border-bottom:0}
+    .dot{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;
+      border:0;cursor:pointer;font:inherit;font-size:14px;font-weight:800;transition:transform .12s, box-shadow .12s}
+    .dot:hover{transform:scale(1.08)}
+    .dot:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+    .dot.green{background:#e3f6ec;color:#0f7a4d}
+    .dot.amber{background:#fdf2e3;color:#a4600f}
+    .dot.red{background:#fdeaec;color:#b42318}
+    .dot.none{background:#f4f5f8;color:#98a2b3}
+    .dot.is-selected{box-shadow:0 0 0 3px rgba(52,87,241,.35)}
+    .legend{display:flex;flex-wrap:wrap;gap:18px;padding:14px 18px;border-top:1px solid var(--line);font-size:12px;color:#475467}
+    .legend span.k{display:inline-flex;align-items:center;gap:7px}
+    .legend .dot{width:22px;height:22px;font-size:11px;cursor:default}
+    .score{font-weight:800}
+    .score small{display:block;font-weight:400;font-size:11px;color:var(--muted)}
+    /* ---- detail panel ---- */
+    .detail{margin-top:16px;padding:0;overflow:hidden}
+    .detail-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;border-bottom:1px solid var(--line);background:#fbfbfd}
+    .detail-title{font-size:16px;font-weight:800}
+    .detail-title small{display:block;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+    .detail-close{border:1px solid #d7dae5;background:#fff;border-radius:9px;padding:6px 10px;cursor:pointer;font:inherit;font-size:12px;color:#475467}
+    .detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+    .detail-cell{padding:16px 20px}
+    .detail-cell + .detail-cell{border-left:1px solid var(--line)}
+    .detail-label{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+    .detail-value{margin-top:5px;font-size:26px;font-weight:800;letter-spacing:-.03em}
+    .detail-sub{margin-top:4px;color:var(--muted);font-size:11px}
+    .criteria{list-style:none;margin:0;padding:14px 20px 18px;border-top:1px solid var(--line);font-size:13px}
+    .criteria li{display:flex;gap:9px;align-items:flex-start;padding:5px 0}
+    .criteria b{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;flex:0 0 19px;
+      border-radius:50%;font-size:11px;margin-top:1px}
+    .criteria .ok{background:#e3f6ec;color:#0f7a4d}
+    .criteria .no{background:#fdeaec;color:#b42318}
+    .placeholder{padding:22px 20px;color:var(--muted);font-size:13px}
+    .dummy-flag{margin-bottom:14px;padding:12px 16px;background:#fff8ea;border:1px solid #f3ddb0;border-radius:12px;color:#6b4a10;font-size:12px}
+    @media (max-width:760px){
+      .detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .detail-cell:nth-child(3){border-left:0}
+      .detail-cell:nth-child(n+3){border-top:1px solid var(--line)}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="dummy-flag"><strong>Template with dummy data.</strong> Transaction volumes and issue counts per country × mode are invented — only the layout, the rules and the click-through behaviour are real.</div>
+
+  <section id="readinessSection"></section>
+</div>
+
+<script>
+/* =====================================================================
+   PRODUCT READINESS — section template
+   Modes: App to App Async removed on purpose (very exceptional case).
+   Cell rules, per country × operation mode:
+     C1  at least one client in production with that mode
+     C2  clients combined ran >= 200 transactions in the last 7 days
+     C3  no critical issues for that country + mode
+   green  = all three criteria met
+   amber  = at least one criterion not met
+   red    = no criterion met, or there are critical issues
+   grey – = no clients at all in integration or production
+   ===================================================================== */
+const COUNTRIES = ["Mexico", "Chile", "Colombia", "Peru"];
+const MODES = ["Standalone", "Cloud Sync", "Cloud Async", "App to App Sync"];
+const TX_THRESHOLD = 200;
+
+/* DUMMY DATA — replace with real figures.
+   key: "Country|Mode" → { prod, integrating, pipeline, tx, issues } */
+const CELL_DATA = {
+  "Mexico|Standalone":        { prod: 6, integrating: 2, pipeline: 3, tx: 1840, issues: 0 },
+  "Mexico|Cloud Sync":        { prod: 0, integrating: 0, pipeline: 2, tx: 0,    issues: 0 },
+  "Mexico|Cloud Async":       { prod: 0, integrating: 1, pipeline: 0, tx: 45,   issues: 1 },
+  "Mexico|App to App Sync":   { prod: 1, integrating: 3, pipeline: 2, tx: 260,  issues: 1 },
+
+  "Chile|Standalone":         { prod: 6, integrating: 0, pipeline: 2, tx: 2310, issues: 0 },
+  "Chile|Cloud Sync":         { prod: 0, integrating: 2, pipeline: 0, tx: 120,  issues: 0 },
+  "Chile|Cloud Async":        { prod: 0, integrating: 1, pipeline: 0, tx: 30,   issues: 2 },
+  "Chile|App to App Sync":    { prod: 3, integrating: 1, pipeline: 4, tx: 4120, issues: 0 },
+
+  "Colombia|Standalone":      { prod: 11, integrating: 0, pipeline: 1, tx: 1560, issues: 0 },
+  "Colombia|Cloud Sync":      { prod: 0,  integrating: 1, pipeline: 0, tx: 90,   issues: 0 },
+  "Colombia|Cloud Async":     { prod: 0,  integrating: 0, pipeline: 0, tx: 0,    issues: 0 },
+  "Colombia|App to App Sync": { prod: 1,  integrating: 2, pipeline: 1, tx: 210,  issues: 0 },
+
+  "Peru|Standalone":          { prod: 5, integrating: 0, pipeline: 2, tx: 640, issues: 0 },
+  "Peru|Cloud Sync":          { prod: 0, integrating: 0, pipeline: 2, tx: 0,   issues: 0 },
+  "Peru|Cloud Async":         { prod: 0, integrating: 0, pipeline: 0, tx: 0,   issues: 0 },
+  "Peru|App to App Sync":     { prod: 0, integrating: 0, pipeline: 1, tx: 0,   issues: 0 }
+};
+
+const cell = (country, mode) => CELL_DATA[country + "|" + mode] || { prod: 0, integrating: 0, pipeline: 0, tx: 0, issues: 0 };
+const esc = v => String(v ?? "").replace(/[&<>'"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;" }[c]));
+const nf = n => n.toLocaleString("en-US");
+
+function evaluate(country, mode) {
+  const d = cell(country, mode);
+  const active = d.prod + d.integrating;
+  if (!active) return { state: "none", d, active, c1: false, c2: false, c3: d.issues === 0, met: 0 };
+  const c1 = d.prod >= 1, c2 = d.tx >= TX_THRESHOLD, c3 = d.issues === 0;
+  const met = [c1, c2, c3].filter(Boolean).length;
+  const state = d.issues > 0 ? "red" : met === 3 ? "green" : met === 0 ? "red" : "amber";
+  return { state, d, active, c1, c2, c3, met };
+}
+
+const ICON = { green: "✓", amber: "!", red: "✕", none: "–" };
+const STATE_LABEL = {
+  green: "Ready — all three criteria met",
+  amber: "Partial — at least one criterion not met",
+  red: "Not ready — critical issues or no criteria met",
+  none: "No clients in integration or production"
+};
+
+function renderReadiness() {
+  const counts = { green: 0, amber: 0, red: 0, none: 0 };
+  const rows = COUNTRIES.map(country => {
+    const cells = MODES.map(mode => {
+      const r = evaluate(country, mode);
+      counts[r.state]++;
+      const label = country + " · " + mode + " — " + STATE_LABEL[r.state];
+      return "<td>" + '<button type="button" class="dot ' + r.state + '" data-country="' + esc(country) + '" data-mode="' + esc(mode) +
+        '" title="' + esc(label) + '" aria-label="' + esc(label) + '">' + ICON[r.state] + "</button></td>";
+    }).join("");
+    const ready = MODES.filter(m => evaluate(country, m).state === "green").length;
+    return "<tr><td>" + esc(country) + "</td>" + cells +
+      '<td class="score">' + ready + " / " + MODES.length + "<small>modes ready</small></td></tr>";
+  }).join("");
+
+  const total = COUNTRIES.length * MODES.length;
+  document.getElementById("readinessSection").innerHTML =
+    '<div class="section-head"><div><h2>Product readiness</h2>' +
+    "<p>Readiness of each operation mode per country, judged on three criteria: at least one client in production with that mode, at least " + TX_THRESHOLD +
+    " transactions across those clients in the last week, and no critical issues for that country and mode. App to App Async is excluded, as both apps run on the same terminal and async calls add little value there. Click any cell for the underlying numbers.</p></div>" +
+    '<div class="score" style="font-size:20px">' + counts.green + " / " + total + '<small>cells ready</small></div></div>' +
+    '<article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Country</th>' +
+    MODES.map(m => "<th>" + esc(m) + "</th>").join("") + "<th>Readiness</th></tr></thead><tbody>" + rows + "</tbody></table></div>" +
+    '<div class="legend">' +
+    ['green','amber','red','none'].map(s => '<span class="k"><span class="dot ' + s + '">' + ICON[s] + "</span>" + esc(STATE_LABEL[s]) + "</span>").join("") +
+    "</div>" +
+    '<div class="matrix-note">A single client is enough to cover a mode, and one client can cover several. Transactions are the last 7 full days, summed across clients in production and integration for that country and mode. Critical issues are urgent or higher and force the red state on their own.</div></article>' +
+    '<article class="card detail" id="detailPanel"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article>';
+
+  document.querySelectorAll("button.dot").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll("button.dot").forEach(b => b.classList.remove("is-selected"));
+    btn.classList.add("is-selected");
+    renderDetail(btn.dataset.country, btn.dataset.mode);
+  }));
+}
+
+function renderDetail(country, mode) {
+  const r = evaluate(country, mode), d = r.d;
+  const tick = (ok, text) => "<li><b class=" + (ok ? '"ok">✓' : '"no">✕') + "</b><span>" + text + "</span></li>";
+  document.getElementById("detailPanel").innerHTML =
+    '<div class="detail-head"><div class="detail-title">' + esc(country) + " · " + esc(mode) + "</div>" +
+    '<div style="display:flex;align-items:center;gap:12px"><span class="dot ' + r.state + '" style="cursor:default">' + ICON[r.state] + "</span>" +
+    '<button type="button" class="detail-close" id="detailClose">Close</button></div></div>' +
+    '<div class="detail-grid">' +
+    '<div class="detail-cell"><div class="detail-label">Clients in production + integration</div><div class="detail-value">' + r.active +
+    '</div><div class="detail-sub">' + d.prod + " in production · " + d.integrating + " integrating</div></div>" +
+    '<div class="detail-cell"><div class="detail-label">Clients in pipeline</div><div class="detail-value">' + d.pipeline +
+    '</div><div class="detail-sub">Not counted for readiness</div></div>' +
+    '<div class="detail-cell"><div class="detail-label">Transactions last week</div><div class="detail-value">' + nf(d.tx) +
+    '</div><div class="detail-sub">Threshold ' + nf(TX_THRESHOLD) + "</div></div>" +
+    '<div class="detail-cell"><div class="detail-label">Critical issues</div><div class="detail-value">' + d.issues +
+    '</div><div class="detail-sub">' + (d.issues ? "Forces the red state" : "None open") + "</div></div></div>" +
+    '<ul class="criteria">' +
+    tick(r.c1, "At least one client in production with this mode — " + d.prod + " in production") +
+    tick(r.c2, "At least " + nf(TX_THRESHOLD) + " transactions last week — " + nf(d.tx) + " recorded") +
+    tick(r.c3, "No critical issues for this country and mode — " + d.issues + " open") +
+    "</ul>";
+  document.getElementById("detailClose").addEventListener("click", () => {
+    document.querySelectorAll("button.dot").forEach(b => b.classList.remove("is-selected"));
+    document.getElementById("detailPanel").innerHTML =
+      '<div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div>';
+  });
+}
+
+renderReadiness();
+</script>
+</body></html>
