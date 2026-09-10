@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<!-- saved from url=(0146)file:///Users/waldo/Library/Application%20Support/Claude-3p/local-agent-mode-sessions/b40540bb/00000000/d58dc65b/outputs/kushki-one-report-en.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kushki ONE | Regional status — coverage, releases and issues</title>
+  <!-- Terminology: always "clients" (never "merchants"). -->
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #101828; --muted: #667085; --line: #e7e9f0; --soft: #f6f7fb; --paper: #ffffff;
+      --blue: #3457f1; --blue-2: #6c7cff; --purple: #6d3df5; --cyan: #1aa7ec;
+      --green: #16a36a; --amber: #e9a23b; --red: #d94b5c;
+      --shadow: 0 12px 32px rgba(30, 35, 90, .08); --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--soft);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px; line-height: 1.45; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    /* Slim meta line replacing the old blue header block */
+    .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+      color: var(--muted); font-size: 12px; }
+    .meta-row .brand-plain { color: var(--ink); font-weight: 800; letter-spacing: .04em; }
+    .meta-row a { color: var(--blue); }
+    main { margin-top: 34px; padding-bottom: 64px; }
+    .section { margin-top: 28px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .section-head h2 { margin: 0; font-size: 22px; letter-spacing: -.02em; }
+    .section-head p { margin: 4px 0 0; color: var(--muted); }
+    .summary-head { padding-top: 10px; margin-bottom: 20px; }
+    /* ---- product readiness matrices ---- */
+    .dot { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%;
+      border:0; cursor:pointer; font:inherit; font-size:14px; font-weight:800; transition:transform .12s, box-shadow .12s; }
+    .dot:hover { transform: scale(1.08); }
+    .dot:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }
+    .dot.green { background:#e3f6ec; color:#0f7a4d; }
+    .dot.amber { background:#fdf2e3; color:#a4600f; }
+    .dot.red { background:#fdeaec; color:#b42318; }
+    .dot.none { background:#f4f5f8; color:#98a2b3; }
+    .dot.is-selected { box-shadow: 0 0 0 3px rgba(52,87,241,.35); }
+    .legend { display:flex; flex-wrap:wrap; gap:18px 26px; padding:15px 18px; border-top:1px solid var(--line);
+      background:#fafaff; font-size:12px; color:#475467; }
+    .legend span.k { display:inline-flex; align-items:center; gap:7px; }
+    .legend .dot { width:22px; height:22px; font-size:11px; cursor:default; }
+    .legend .dot:hover { transform:none; }
+    .detail { margin-top:16px; overflow:hidden; }
+    .detail-head { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 20px;
+      border-bottom:1px solid var(--line); background:#fbfbfd; }
+    .detail-title { font-size:16px; font-weight:800; }
+    .detail-close { border:1px solid #d7dae5; background:#fff; border-radius:9px; padding:6px 10px; cursor:pointer;
+      font:inherit; font-size:12px; color:#475467; }
+    .detail-grid { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); }
+    .detail-cell { padding:16px 20px; }
+    .detail-cell + .detail-cell { border-left:1px solid var(--line); }
+    .detail-label { color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+    .detail-value { margin-top:5px; font-size:26px; font-weight:800; letter-spacing:-.03em; }
+    .detail-sub { margin-top:4px; color:var(--muted); font-size:11px; }
+    .issue-block { padding:14px 20px; border-top:1px solid var(--line); background:#fffaf2; font-size:12px; color:#6b4a10; }
+    .issue-block strong { color:#5a3d0a; }
+    .issue-block ul { margin:8px 0 0; padding-left:18px; }
+    .issue-block li { padding:2px 0; }
+    .criteria { list-style:none; margin:0; padding:14px 20px 18px; border-top:1px solid var(--line); font-size:13px; }
+    .criteria li { display:flex; gap:9px; align-items:flex-start; padding:5px 0; }
+    .criteria b { display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; flex:0 0 19px;
+      border-radius:50%; font-size:11px; margin-top:1px; }
+    .criteria .ok { background:#e3f6ec; color:#0f7a4d; }
+    .criteria .no { background:#fdeaec; color:#b42318; }
+    .cov-table td.cell { white-space: normal; }
+    .cell-reasons { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; color: var(--muted);
+      font-size: 10.5px; line-height: 1.3; max-width: 150px; margin-left: auto; margin-right: auto; }
+    .placeholder { padding:22px 20px; color:var(--muted); font-size:13px; }
+    .dummy-flag { margin: 22px 0 0; padding:12px 16px; background:#fff8ea; border:1px solid #f3ddb0;
+      border-radius:12px; color:#6b4a10; font-size:12px; }
+    .card { background: var(--paper); border: 1px solid rgba(231,233,240,.9); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .narrative { padding: 22px 24px; margin-bottom: 16px; }
+    .narrative p { margin: 0 0 11px; color: #344054; }
+    .narrative p:last-child { margin-bottom: 0; }
+    .narrative strong { color: var(--ink); }
+    .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .kpi { padding: 20px; min-height: 120px; }
+    .kpi-label { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .kpi-value { margin-top: 7px; font-size: 34px; line-height: 1; font-weight: 800; letter-spacing: -.04em; }
+    .kpi-note { margin-top: 9px; color: var(--muted); font-size: 12px; }
+    .country-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .country-card { overflow: hidden; }
+    .country-title { display: flex; align-items: center; justify-content: space-between; padding: 20px 22px 14px; }
+    .country-name { font-size: 18px; font-weight: 800; }
+    .country-total { font-size: 26px; font-weight: 800; letter-spacing: -.04em; }
+    .country-total small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .04em; text-align: right; text-transform: uppercase; }
+    .integration-strip { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .integration-cell { padding: 14px 18px; }
+    .integration-cell + .integration-cell { border-left: 1px solid var(--line); }
+    .integration-name { color: var(--muted); font-size: 11px; font-weight: 700; }
+    .integration-value { margin-top: 3px; font-size: 22px; font-weight: 800; }
+    .service-list { padding: 16px 22px 20px; }
+    .matrix-card { overflow: hidden; }
+    .matrix-note { padding: 14px 18px; color: var(--muted); background: #fafaff; border-bottom: 1px solid var(--line); font-size: 12px; border-radius: 12px; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; white-space: nowrap; }
+    th { color: var(--muted); background: #fbfbfd; font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    .integration-tag, .tag { display: inline-flex; align-items: center; min-height: 25px; padding: 4px 9px; border-radius: 99px; font-size: 11px; font-weight: 700; }
+    .integration-tag { color: #3745a4; background: #eef0ff; }
+    .issues-card { overflow: hidden; }
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; padding: 16px; border-bottom: 1px solid var(--line); background: #fbfbfd; }
+    select, input[type="search"] { height: 38px; padding: 0 34px 0 12px; color: var(--ink); background: #fff;
+      border: 1px solid #d7dae5; border-radius: 10px; font: inherit; outline: none; }
+    input[type="search"] { min-width: 245px; padding-right: 12px; }
+    select:focus, input[type="search"]:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(52,87,241,.12); }
+    .issue-title { min-width: 280px; white-space: normal; font-weight: 750; }
+    .issue-id { color: var(--muted); font-size: 11px; font-weight: 700; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; max-width: 310px; white-space: normal; }
+    .tag { color: #344054; background: #f0f2f7; }
+    .tag.country { color: #17496f; background: #e8f5fc; }
+    .tag.service { color: #57411a; background: #fff3d8; }
+    .tag.dms { color: #5c2581; background: #f4e9ff; }
+    .tag.pipeline { color: #4b2196; background: #efe8ff; }
+    .empty { padding: 48px 24px; text-align: center; color: var(--muted); }
+    .empty strong { display: block; margin-bottom: 6px; color: var(--ink); font-size: 16px; }
+    details { margin-top: 18px; }
+    details summary { cursor: pointer; color: var(--blue); font-weight: 750; }
+    .guide { margin-top: 10px; padding: 18px 20px; color: #475467; background: #eef1ff; border: 1px solid #dce1ff; border-radius: 14px; font-size: 12px; }
+    .callout { margin-top: 14px; padding: 14px 18px; background: #fff8ea; border: 1px solid #f3ddb0; border-radius: 12px; color: #6b4a10; font-size: 12px; }
+    footer { padding: 20px 0 38px; color: var(--muted); text-align: center; font-size: 11px; }
+    .pie-pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:0 22px 24px}
+    .pie-block{background:#f6f7fb;border:1px solid var(--line);padding:16px;border-radius:12px}
+    .pie-block h3{font-size:15px;margin:0 0 12px;padding-bottom:12px;border-bottom:1px solid #dce1ed}
+    .pie-block svg{display:block;width:160px;max-width:100%;margin:auto auto 14px}
+    .pie-legend{display:grid;grid-template-columns:9px 1fr auto;gap:7px;align-items:center;font-size:11px;margin:8px 0}
+    .pie-legend>span:first-child{height:9px;width:9px;border-radius:3px}
+    .metric-group{margin:0 20px 18px;padding:14px 0 0;border-top:1px solid var(--line)}
+    .metric-group h3{margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#475467}
+    .metric-group .integration-strip{border:0;background:#f6f7fb;border-radius:10px;overflow:hidden;grid-template-columns:repeat(2,1fr)}
+    .usage-group{padding-top:18px}
+    .usage-group .integration-strip{background:#eef2ff;grid-template-columns:repeat(5,1fr)}
+    .usage-group .integration-cell{padding:12px 10px}
+    .usage-group .integration-name{font-size:10px;line-height:1.25;min-height:26px}
+    .usage-group .integration-value{font-size:19px}
+    .status-table td:first-child, .status-table th:first-child { font-weight: 800; }
+    .status-table .num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 750; }
+    .status-table th:nth-child(n+2):nth-child(-n+6) { text-align: right; }
+    .status-table .tags { max-width: 240px; }
+    .status-table .cov-total td { font-weight: 800; }
+    .cov-table td, .cov-table th { text-align: center; }
+    /* ◌ = mode covered only by a churned client */
+    .cov-table td:first-child, .cov-table th:first-child { text-align: left; font-weight: 800; }
+    .cov-yes { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#e3f6ec; color:#16825c; font-weight:800; }
+    .cov-int { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#eef2ff; color:#3457f1; font-weight:800; }
+    .cov-chu { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#fdf2e3; color:#a4600f; font-weight:800; }
+    .cov-no { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#f4f5f8; color:#98a2b3; font-weight:800; }
+    .cov-pct { font-weight: 800; }
+    .cov-total td { background: #fbfbfd; }
+    .bar-mini { height: 7px; border-radius: 99px; background: #eceef6; overflow: hidden; margin-top: 8px; }
+    .bar-mini > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--blue-2)); }
+    @media (max-width: 900px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .country-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 24px, 1180px); }
+      .topbar { padding-top: 24px; }
+      .brand-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .kpis { grid-template-columns: 1fr; }
+      .integration-strip, .usage-group .integration-strip { grid-template-columns: 1fr; }
+      .integration-cell + .integration-cell { border-left: 0; border-top: 1px solid var(--line); }
+      .pie-pair{grid-template-columns:1fr}
+      input[type="search"], select { width: 100%; }
+    }
+    @media print {
+      @page { size: A4 portrait; margin: 12mm; }
+      body { background: #fff; font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .card { box-shadow: none; break-inside: avoid; }
+      .country-grid { grid-template-columns: repeat(2, 1fr); }
+      main { margin-top: 18px; padding-bottom: 12px; }
+      .section { break-inside: avoid; }
+      .detail-close { display: none; }
+      /* Expand collapsed client lists and the criteria block so the PDF is complete */
+      details > summary { display: none; }
+      details > *:not(summary) { display: block !important; }
+      .service-list details::before { content: "Clients"; display: block; margin-bottom: 6px;
+        color: #667085; font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+      .guide { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="meta-row">
+      <span class="brand-plain">KUSHKI ONE · Regional status</span>
+      <span>Source: <a href="https://docs.google.com/spreadsheets/d/1qHi_HphqZV8yhYy0Gza1FZMRX9xx9N9qTex1pCbSb0o/edit" target="_blank" rel="noopener noreferrer">Spreadsheet link</a></span>
+    </div>
+    <div class="section-head summary-head"><h2>Summary</h2></div>
+
+    <article class="card narrative">
+      <p><strong>Where we stand.</strong> 31 clients in production and 10 integrating (Colombia 11, Chile 9, Mexico 6, Peru 5; one churned in Peru). Almost all productive volume is Standalone — the only integrated mode with productive clients is App to App Sync in Chile.</p>
+      <p><strong>Blockers.</strong> Three critical issues are open, all with a committed ship date: everything affecting clients is resolved by 15/09/2026. They are what keeps Chile Cloud Async, Mexico App to App Sync and Preauth &amp; Capture red. Urgent issues from live clients go out as an immediate hotfix.</p>
+      <p><strong>Releases.</strong> 37 tickets in the last four releases, 30 approved on first review (81%). Quality and speed are improving: 74% approved and 17 days to production on 21/08, versus 90% and 4 days on 03/09; hotfixes shipped in 1–2 days.</p>
+      <p><strong>Pipeline.</strong> Nine projected clients: Chile 5, Peru 4, Mexico 3, Colombia 1 — mostly Standalone and App to App Sync.</p>
+    </article>
+
+    <section class="kpis" aria-label="Key indicators">
+      <article class="card kpi"><div class="kpi-label">Clients in production / integration</div><div class="kpi-value" id="kpiProd">31 <span style="color:var(--muted);font-weight:700">/</span> 10</div><div class="kpi-note" id="kpiProdNote">First number: unique clients live in production. Second number: clients currently integrating. 1 client churned.</div></article>
+      <article class="card kpi"><div class="kpi-label">Coverage by operation mode</div><div class="kpi-value" id="kpiCovMode">31%</div><div class="kpi-note" id="kpiCovModeNote">5 of 16 country × operation mode combinations meet all three readiness criteria</div><div class="bar-mini"><div id="kpiCovModeBar" style="width: 31%;"></div></div></article>
+      <article class="card kpi"><div class="kpi-label">Coverage by service</div><div class="kpi-value" id="kpiCovService">44%</div><div class="kpi-note" id="kpiCovServiceNote">7 of 16 country × service combinations meet all three readiness criteria</div><div class="bar-mini"><div id="kpiCovServiceBar" style="width: 44%;"></div></div></article>
+      <article class="card kpi"><div class="kpi-label">First-pass approval</div><div class="kpi-value" id="kpiFirstPass">81%</div><div class="kpi-note" id="kpiFirstPassNote">30 of 37 tickets approved on first review across the last 4 releases</div></article>
+      <article class="card kpi"><div class="kpi-label">Average time to production</div><div class="kpi-value" id="kpiTimeToProd">6.0 <span style="font-size:16px;color:var(--muted);font-weight:700">days</span></div><div class="kpi-note" id="kpiTimeToProdNote">Calendar days from first delivery of a release to production, averaged over the last 4 releases · 10.5 on release candidates, 1.5 on hotfixes</div></article>
+      <article class="card kpi"><div class="kpi-label">Open critical issues</div><div class="kpi-value" id="kpiIssues">3</div><div class="kpi-note" id="kpiIssuesNote">High, urgent or immediate issues affecting clients in integration or production. All resolved by 15/09/2026.</div></article>
+    </section>
+
+    <section class="section" id="countryStatus"><div class="section-head"><div><h2>Country status</h2><p>Clients, weekly volume and what is actually live in each country. Operation modes and services are listed only when at least one client in production uses them.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table class="status-table"><thead><tr><th>Country</th><th>Clients in production</th><th>In integration</th><th>Pipeline</th><th>Transactions last week</th><th>TPV last week</th><th>Operation modes live</th><th>Services live</th></tr></thead><tbody><tr><td>Mexico</td><td class="num">6</td><td class="num">5</td><td class="num">3</td><td class="num">2,145</td><td class="num">USD 38,600</td><td><div class="tags"><span class="integration-tag">Standalone</span></div></td><td><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span></div></td></tr><tr><td>Chile</td><td class="num">9</td><td class="num">4</td><td class="num">5</td><td class="num">6,580</td><td class="num">USD 98,700</td><td><div class="tags"><span class="integration-tag">Standalone</span><span class="integration-tag">App to App Sync</span></div></td><td><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span><span class="integration-tag">Other Services</span></div></td></tr><tr><td>Colombia</td><td class="num">11</td><td class="num">3</td><td class="num">1</td><td class="num">1,860</td><td class="num">USD 26,000</td><td><div class="tags"><span class="integration-tag">Standalone</span></div></td><td><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span></div></td></tr><tr><td>Peru</td><td class="num">5</td><td class="num">0</td><td class="num">4</td><td class="num">640</td><td class="num">USD 12,800</td><td><div class="tags"><span class="integration-tag">Standalone</span></div></td><td><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span></div></td></tr><tr class="cov-total"><td>Regional</td><td class="num">31</td><td class="num">10</td><td class="num">9</td><td class="num">11,225</td><td class="num">USD 176,100</td><td><div class="tags"><span class="integration-tag">Standalone</span><span class="integration-tag">App to App Sync</span></div></td><td><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span><span class="integration-tag">Other Services</span></div></td></tr></tbody></table></div><div class="matrix-note" style="border-radius:0;border-top:1px solid var(--line);border-bottom:0">Clients in production, in integration and in pipeline are unique client names per country; in the regional row a client present in several countries counts once, and the modes and services listed are the union of everything live in any country. Transactions and TPV cover the last 7 full days and are placeholder data until we have a source. Modes and services live require at least one client in production, not just integrating.</div></article></section>
+
+    <div class="dummy-flag"><strong>Transactions, TPV and per-cell issues are dummy data.</strong> Client, pipeline, release and issue counts come from the spreadsheet; weekly transaction volumes, TPV and the issue list per country × mode / service are still placeholders.</div>
+
+    <section class="section" id="readinessByMode"><div class="section-head"><div><h2>Product readiness by operation mode</h2><p>Readiness of each operation mode per country, judged on three criteria: at least one client in production with that operation mode, at least 200 transactions across those clients in the last week, and no critical issues for that country and operation mode.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table class="cov-table"><thead><tr><th>Country</th><th>Standalone</th><th>Cloud Sync</th><th>Cloud Async</th><th>App to App Sync</th></tr></thead><tbody><tr><td>Mexico</td><td class="cell"><button type="button" class="dot green" data-country="Mexico" data-column="Standalone" title="Mexico · Standalone — Ready — all three criteria met" aria-label="Mexico · Standalone — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot none" data-country="Mexico" data-column="Cloud Sync" title="Mexico · Cloud Sync — No clients in integration or production" aria-label="Mexico · Cloud Sync — No clients in integration or production">–</button></td><td class="cell"><button type="button" class="dot none" data-country="Mexico" data-column="Cloud Async" title="Mexico · Cloud Async — No clients in integration or production" aria-label="Mexico · Cloud Async — No clients in integration or production">–</button></td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="App to App Sync" title="Mexico · App to App Sync — Not ready — critical issues or no criteria met" aria-label="Mexico · App to App Sync — Not ready — critical issues or no criteria met">✕</button><div class="cell-reasons"><span>1 issue — all resolved by 10/09/2026</span><span>No clients in production</span></div></td></tr><tr><td>Chile</td><td class="cell"><button type="button" class="dot green" data-country="Chile" data-column="Standalone" title="Chile · Standalone — Ready — all three criteria met" aria-label="Chile · Standalone — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot amber" data-country="Chile" data-column="Cloud Sync" title="Chile · Cloud Sync — Partial — at least one criterion not met" aria-label="Chile · Cloud Sync — Partial — at least one criterion not met">!</button><div class="cell-reasons"><span>No clients in production</span><span>Low transactions — 120</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="Cloud Async" title="Chile · Cloud Async — Not ready — critical issues or no criteria met" aria-label="Chile · Cloud Async — Not ready — critical issues or no criteria met">✕</button><div class="cell-reasons"><span>2 issues — all resolved by 15/09/2026</span><span>No clients in production</span><span>Low transactions — 30</span></div></td><td class="cell"><button type="button" class="dot green" data-country="Chile" data-column="App to App Sync" title="Chile · App to App Sync — Ready — all three criteria met" aria-label="Chile · App to App Sync — Ready — all three criteria met">✓</button></td></tr><tr><td>Colombia</td><td class="cell"><button type="button" class="dot green" data-country="Colombia" data-column="Standalone" title="Colombia · Standalone — Ready — all three criteria met" aria-label="Colombia · Standalone — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot amber" data-country="Colombia" data-column="Cloud Sync" title="Colombia · Cloud Sync — Partial — at least one criterion not met" aria-label="Colombia · Cloud Sync — Partial — at least one criterion not met">!</button><div class="cell-reasons"><span>No clients in production</span><span>Low transactions — 90</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Colombia" data-column="Cloud Async" title="Colombia · Cloud Async — No clients in integration or production" aria-label="Colombia · Cloud Async — No clients in integration or production">–</button></td><td class="cell"><button type="button" class="dot amber" data-country="Colombia" data-column="App to App Sync" title="Colombia · App to App Sync — Partial — at least one criterion not met" aria-label="Colombia · App to App Sync — Partial — at least one criterion not met">!</button><div class="cell-reasons"><span>No clients in production</span></div></td></tr><tr><td>Peru</td><td class="cell"><button type="button" class="dot green" data-country="Peru" data-column="Standalone" title="Peru · Standalone — Ready — all three criteria met" aria-label="Peru · Standalone — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Cloud Sync" title="Peru · Cloud Sync — No clients in integration or production" aria-label="Peru · Cloud Sync — No clients in integration or production">–</button></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Cloud Async" title="Peru · Cloud Async — No clients in integration or production" aria-label="Peru · Cloud Async — No clients in integration or production">–</button></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="App to App Sync" title="Peru · App to App Sync — No clients in integration or production" aria-label="Peru · App to App Sync — No clients in integration or production">–</button></td></tr></tbody></table></div><div class="legend"><span class="k"><span class="dot green">✓</span>Ready — all three criteria met</span><span class="k"><span class="dot amber">!</span>Partial — at least one criterion not met</span><span class="k"><span class="dot red">✕</span>Not ready — critical issues or no criteria met</span><span class="k"><span class="dot none">–</span>No clients in integration or production</span></div></article><article class="card detail" id="readinessByModeDetail"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article></section>
+    <section class="section" id="readinessByService"><div class="section-head"><div><h2>Product readiness by service</h2><p>Readiness of each service per country, judged on three criteria: at least one client in production with that service, at least 200 transactions across those clients in the last week, and no critical issues for that country and service.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table class="cov-table"><thead><tr><th>Country</th><th>Charge</th><th>Preauth &amp; Capture</th><th>Refunds</th><th>Other Services</th></tr></thead><tbody><tr><td>Mexico</td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="Charge" title="Mexico · Charge — Not ready — critical issues or no criteria met" aria-label="Mexico · Charge — Not ready — critical issues or no criteria met">✕</button><div class="cell-reasons"><span>1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="Preauth &amp; Capture" title="Mexico · Preauth &amp; Capture — Not ready — critical issues or no criteria met" aria-label="Mexico · Preauth &amp; Capture — Not ready — critical issues or no criteria met">✕</button><div class="cell-reasons"><span>1 issue — all resolved by 10/09/2026</span><span>No clients in production</span><span>Low transactions — 80</span></div></td><td class="cell"><button type="button" class="dot green" data-country="Mexico" data-column="Refunds" title="Mexico · Refunds — Ready — all three criteria met" aria-label="Mexico · Refunds — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot amber" data-country="Mexico" data-column="Other Services" title="Mexico · Other Services — Partial — at least one criterion not met" aria-label="Mexico · Other Services — Partial — at least one criterion not met">!</button><div class="cell-reasons"><span>No clients in production</span><span>Low transactions — 150</span></div></td></tr><tr><td>Chile</td><td class="cell"><button type="button" class="dot green" data-country="Chile" data-column="Charge" title="Chile · Charge — Ready — all three criteria met" aria-label="Chile · Charge — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot none" data-country="Chile" data-column="Preauth &amp; Capture" title="Chile · Preauth &amp; Capture — No clients in integration or production" aria-label="Chile · Preauth &amp; Capture — No clients in integration or production">–</button></td><td class="cell"><button type="button" class="dot green" data-country="Chile" data-column="Refunds" title="Chile · Refunds — Ready — all three criteria met" aria-label="Chile · Refunds — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot green" data-country="Chile" data-column="Other Services" title="Chile · Other Services — Ready — all three criteria met" aria-label="Chile · Other Services — Ready — all three criteria met">✓</button></td></tr><tr><td>Colombia</td><td class="cell"><button type="button" class="dot green" data-country="Colombia" data-column="Charge" title="Colombia · Charge — Ready — all three criteria met" aria-label="Colombia · Charge — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="Preauth &amp; Capture" title="Colombia · Preauth &amp; Capture — Not ready — critical issues or no criteria met" aria-label="Colombia · Preauth &amp; Capture — Not ready — critical issues or no criteria met">✕</button><div class="cell-reasons"><span>1 issue — all resolved by 10/09/2026</span><span>No clients in production</span><span>Low transactions — 40</span></div></td><td class="cell"><button type="button" class="dot green" data-country="Colombia" data-column="Refunds" title="Colombia · Refunds — Ready — all three criteria met" aria-label="Colombia · Refunds — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot amber" data-country="Colombia" data-column="Other Services" title="Colombia · Other Services — Partial — at least one criterion not met" aria-label="Colombia · Other Services — Partial — at least one criterion not met">!</button><div class="cell-reasons"><span>No clients in production</span><span>Low transactions — 110</span></div></td></tr><tr><td>Peru</td><td class="cell"><button type="button" class="dot green" data-country="Peru" data-column="Charge" title="Peru · Charge — Ready — all three criteria met" aria-label="Peru · Charge — Ready — all three criteria met">✓</button></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Preauth &amp; Capture" title="Peru · Preauth &amp; Capture — No clients in integration or production" aria-label="Peru · Preauth &amp; Capture — No clients in integration or production">–</button></td><td class="cell"><button type="button" class="dot amber" data-country="Peru" data-column="Refunds" title="Peru · Refunds — Partial — at least one criterion not met" aria-label="Peru · Refunds — Partial — at least one criterion not met">!</button><div class="cell-reasons"><span>Low transactions — 190</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Other Services" title="Peru · Other Services — No clients in integration or production" aria-label="Peru · Other Services — No clients in integration or production">–</button></td></tr></tbody></table></div><div class="legend"><span class="k"><span class="dot green">✓</span>Ready — all three criteria met</span><span class="k"><span class="dot amber">!</span>Partial — at least one criterion not met</span><span class="k"><span class="dot red">✕</span>Not ready — critical issues or no criteria met</span><span class="k"><span class="dot none">–</span>No clients in integration or production</span></div></article><article class="card detail" id="readinessByServiceDetail"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article></section>
+
+    <section class="section" id="releaseSection"><div class="section-head"><div><h2>Release status</h2><p>Delivery, production shipping and first-review results.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Release type</th><th>First delivery</th><th>Shipped to production</th><th>Days to production</th><th>Status</th><th>Tickets</th><th>Approved on first review</th><th>First-pass approval</th></tr></thead><tbody><tr><td><span class="integration-tag">Release Candidate</span></td><td>21/08/2026</td><td>07/09/2026</td><td style="">17</td><td>Shipped to production</td><td>23</td><td>17</td><td>73.9%</td></tr><tr><td><span class="integration-tag">Release Candidate</span></td><td>03/09/2026</td><td>07/09/2026</td><td style="">4</td><td>Shipped to production</td><td>10</td><td>9</td><td>90.0%</td></tr><tr><td><span class="integration-tag">Hotfix</span></td><td>31/08/2026</td><td>02/09/2026</td><td style="">2</td><td>Shipped to production</td><td>3</td><td>3</td><td>100.0%</td></tr><tr><td><span class="integration-tag">Hotfix</span></td><td>07/09/2026</td><td>08/09/2026</td><td style="">1</td><td>Shipped to production</td><td>1</td><td>1</td><td>100.0%</td></tr></tbody></table></div><div class="matrix-note" style="border-radius:0">Days to production = shipping date minus first delivery date (calendar days). First-pass approval = tickets approved on the first review / total tickets. Total: 37 tickets; 30 approved on first review (81.1%). Shipping to production does not imply a per-terminal deployment status.</div></article></section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Critical issues detected</h2>
+          <p>This summary only exposes issues with high, urgent or immediate criticality that are affecting clients in production or integration. High, urgent or immediate issues reported by clients already using the solution are addressed as a hotfix right away.</p>
+        </div>
+        <div id="issueCount">3 issues</div>
+      </div>
+      <article class="card issues-card">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Issue</th><th>Release date</th><th>Country</th><th>Operation mode</th><th>Service / scope</th></tr></thead>
+            <tbody id="issueRows"><tr><td class="issue-title"><div class="issue-id">K1-306</div>Async without transaction reference<p style="font-weight:400;font-size:12px;color:var(--muted)">Async service notifications do not include the transaction reference</p></td><td>15/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag ">Cloud Async</span><span class="tag ">App to App Async</span></div></td><td><div class="tags"><span class="tag service">Charge</span><span class="tag service">Preauth &amp; Capture</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-308</div>Reauth does not respect tax breakdown<p style="font-weight:400;font-size:12px;color:var(--muted)">Error splitting taxes on reauthorization</p></td><td>10/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag ">App to App Sync</span><span class="tag ">App to App Async</span><span class="tag ">Cloud Sync</span><span class="tag ">Cloud Async</span></div></td><td><div class="tags"><span class="tag service">Preauth &amp; Capture</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-286</div>DMS update pull<p style="font-weight:400;font-size:12px;color:var(--muted)">Provides a simpler way to update applications on terminals</p></td><td>10/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag ">App to App Sync</span><span class="tag ">App to App Async</span><span class="tag ">Cloud Sync</span><span class="tag ">Cloud Async</span></div></td><td><div class="tags"><span class="tag dms">DMS</span></div></td></tr></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <details>
+      <summary>Reporting criteria</summary>
+      <div class="guide">Regional totals count unique client names; within a country each client is counted once. Clients declared in several countries are replicated per country (Justo in Chile, Mexico and Colombia; Fintoc in Chile and Peru; Yuno in four countries), so the sum across countries is higher than the unique regional total. Clients with several operation modes are counted once in each declared mode, so the sum across modes can exceed the client count. Operation modes: Standalone, Cloud Sync, Cloud Async, App to App Sync and App to App Async. <strong>Coverage</strong> is the share of cells that meet all three readiness criteria: at least one client in production with that operation mode or service, at least 200 transactions across those clients in the last week, and no critical issues for that country and mode or service. Green means all three are met, amber means at least one is missing, red means no criterion is met or there are critical issues, and grey “–” means there are no clients at all in integration or production. App to App Async is excluded from the matrix, as both apps run on the same terminal and async calls add little value there. Clicking a cell shows the clients behind it, the clients in pipeline, the weekly transactions and the open issues with the date the last ticket is resolved. Pipeline clients never count towards readiness or coverage, since they have not started integrating. Client counts come from the spreadsheet; weekly transaction volumes and the per-cell issue lists are still placeholder data. Critical issues cover high, urgent and immediate criticality affecting clients in production or integration. Service mapping from the spreadsheet: Charge → Charge; Void → Refunds; Other Integration Services → Other Services. DMS is an issue scope, not a separate group. Dates are shown as DD/MM/YYYY. Release status is derived from the production shipping date; shipping to production does not imply a per-terminal deployment status.</div>
+    </details>
+  </main>
+
+  <footer>Kushki ONE · Internal report</footer>
+
+  <script>
+  /* ================================================================
+     DATA BLOCK — loaded from the spreadsheet (Clientes, Pipeline,
+     Issues and Releases tabs). Data as of 09/09/2026.
+     Modes: Standalone | Cloud Sync | Cloud Async | App to App Sync | App to App Async
+     ================================================================ */
+  const CH = "Charge", PC = "Preauth & Capture", RF = "Refunds", OS = "Other Services";
+  const ALL4 = [CH, PC, RF, OS];
+  const SA = "Standalone", CSY = "Cloud Sync", CAS = "Cloud Async", ASY = "App to App Sync", AAS = "App to App Async";
+  const PROD = "Production", INT = "Integration", CHU = "Churned", PIPE = "Pipeline";
+  const REPORT_DATA = {
+    updatedAt: "Data as of 09/09/2026",
+    clients: [
+      // ---------- Clients (production / integration / churned): Chile ----------
+      { name:"Sipos", status:PROD, description:"Point of sale software for liquor stores and minimarkets", country:"Chile", integrations:[ASY], services:[CH, OS] },
+      { name:"TAS", status:PROD, description:"Electronic invoicing", country:"Chile", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Muffin", status:PROD, description:"Point of sale software for minimarkets, restaurants, street markets and other small businesses", country:"Chile", integrations:[ASY], services:[CH, RF] },
+      { name:"Hasar", status:INT, description:"Point of sale software and acquirer connection agent", country:"Chile", integrations:[CAS], services:[CH, RF, OS] },
+      { name:"Colegium (Pay C)", status:PROD, description:"Management software for schools and educational institutions", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"EasyCancha", status:INT, description:"Sports court booking software", country:"Chile", integrations:[CSY], services:[CH, RF, OS] },
+      { name:"Justo", status:INT, description:"Restaurant and delivery software", country:"Chile", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"SurPay", status:INT, description:"Point of sale software for supermarkets", country:"Chile", integrations:[CSY], services:[CH, RF] },
+      { name:"PASA MARKET SPA", status:PROD, description:"PASA MARKET SPA", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"Servicios de Cortinas Roller (Kushki 1 pilot)", status:PROD, description:"Roller blind services (Kushki 1 pilot)", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"Emmanuel Barber Shop Spa (KSK 1 pilot)", status:PROD, description:"Barber shop and spa (KSK 1 pilot)", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"Gelatería Firenze", status:PROD, description:"Ice cream shop", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"APIPAY", status:PROD, description:"APIPAY", country:"Chile", integrations:[SA], services:[CH, RF] },
+
+      // ---------- Clients (production / integration / churned): Mexico ----------
+      { name:"Justo", status:INT, description:"Restaurant and delivery software", country:"Mexico", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Wareland", status:INT, description:"Software for service stations (convenience stores)", country:"Mexico", integrations:[ASY], services:[CH, PC, RF, OS] },
+      { name:"Vira Doctores", status:INT, description:"Healthcare software", country:"Mexico", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Cirsa", status:INT, description:"Point of sale software for casinos", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Finsus (COPA TIMON event)", status:INT, description:"Requires 25 terminals (21 K1 Standalone, 4 billpocket)", country:"Mexico", integrations:[SA], services:[CH, RF, OS] },
+      { name:"A LA BURGER (Central de Alianzas)", status:PROD, description:"A LA BURGER (Central de Alianzas)", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"El Rinconcito Comida Mexicana", status:PROD, description:"Mexican food restaurant", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Cleanton Polanco", status:PROD, description:"Cleanton Polanco", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Raku cafe", status:PROD, description:"Coffee shop", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Expertos de la Belleza Estética del Centro (Kushki One pilot)", status:PROD, description:"Beauty and aesthetics services (Kushki One pilot)", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Mal Vicho", status:PROD, description:"Mal Vicho", country:"Mexico", integrations:[SA], services:[CH, RF] },
+
+      // ---------- Clients (production / integration / churned): Colombia ----------
+      { name:"Justo", status:INT, description:"Restaurant and delivery software", country:"Colombia", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Mesa Pay", status:INT, description:"Point of sale software for restaurants", country:"Colombia", integrations:[CSY], services:[CH, RF, OS] },
+      { name:"SinMente", status:INT, description:"Software for nightclubs and bars", country:"Colombia", integrations:[ASY], services:[CH, PC, RF, OS] },
+      { name:"Peluquería Two B - Hair & Beauty", status:PROD, description:"Hair salon", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"LOS MURILLO AS S.A.S.", status:PROD, description:"LOS MURILLO AS S.A.S.", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"Cafetería Kafi (CP - COL pilot)", status:PROD, description:"Coffee shop (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"VIRGLASS (CP - COL pilot)", status:PROD, description:"VIRGLASS (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"IAIA CARMIÑA SAS (CP - COL pilot)", status:PROD, description:"IAIA CARMIÑA SAS (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"IMPACTA LIDERES CON PROPÓSITO SAS (CP - COL pilot)", status:PROD, description:"IMPACTA LIDERES CON PROPÓSITO SAS (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"AZAI NATURA S.A.S. (CP - COL pilot)", status:PROD, description:"AZAI NATURA S.A.S. (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"Plaza Principal SAS (KS1 pilot)", status:PROD, description:"Plaza Principal SAS (KS1 pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"Moshpit - Cristian Salinas (KS1 pilot)", status:PROD, description:"Moshpit - Cristian Salinas (KS1 pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"SANROQUE SPA AND WELLNESS FOR PETS", status:PROD, description:"Pet spa and wellness", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"El Taller Orgánico", status:PROD, description:"Organic food store", country:"Colombia", integrations:[SA], services:[CH, RF] },
+
+      // ---------- Clients (production / integration / churned): Peru ----------
+      { name:"Vossa Salon de Belleza", status:PROD, description:"Beauty salon", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"BODY BALANCE SURCO (Kushki One pilot)", status:PROD, description:"Fitness studio (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"BODY BALANCE MIRAFLORES (Kushki One pilot)", status:PROD, description:"Fitness studio (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"PELUQUERIA MANOS Y TIJERAS (Kushki One pilot)", status:PROD, description:"Hair salon (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"RESTAURANTE MARAPARTE (Kushki One pilot)", status:PROD, description:"Restaurant (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"Fresh It (Kushki One pilot)", status:CHU, description:"Fresh It (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+
+      // ---------- Pipeline ----------
+      { name:"Fintoc", status:PIPE, description:"Standalone solution for retail clients", country:"Chile", integrations:[SA, ASY], services:ALL4 },
+      { name:"Fintoc", status:PIPE, description:"Standalone solution for retail clients", country:"Peru", integrations:[SA, ASY], services:ALL4 },
+      { name:"GNew (Partner)", status:PIPE, description:"Partner; needs a cloud solution for self-service kiosks and an inventory app on the terminal", country:"Mexico", integrations:[SA, ASY, CSY], services:ALL4 },
+      { name:"Trade (Partner)", status:PIPE, description:"Partner; needs a self-service solution for KFC (Cloud terminal)", country:"Peru", integrations:[ASY, CSY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Chile", integrations:[SA, ASY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Peru", integrations:[SA, ASY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Mexico", integrations:[SA, ASY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Colombia", integrations:[SA, ASY], services:ALL4 },
+      { name:"RedPontis (Qubit)", status:PIPE, description:"Partner; distribution for self-service kiosks", country:"Peru", integrations:[CSY], services:ALL4 },
+      { name:"Partner Bsale", status:PIPE, description:"Transport solution with K1 terminals", country:"Chile", integrations:[SA, ASY], services:ALL4 },
+      { name:"Viva Air MX", status:PIPE, description:"Airport solution plus onboard payments", country:"Mexico", integrations:[SA, ASY, CSY], services:ALL4 },
+      { name:"Friendlypos", status:PIPE, description:"App to App solution, Sipos-like", country:"Chile", integrations:[ASY], services:ALL4 },
+      { name:"Metriax", status:PIPE, description:"App to App solution, Sipos-like", country:"Chile", integrations:[ASY], services:ALL4 }
+    ],
+    issues: [
+      { id:"K1-306", title:"Async without transaction reference", description:"Async service notifications do not include the transaction reference", deliveryDate:"15/09/2026",
+        countries:["Chile","Mexico","Peru","Colombia"], integrations:[CAS, AAS], services:[CH, PC], dms:false, status:"Open" },
+      { id:"K1-308", title:"Reauth does not respect tax breakdown", description:"Error splitting taxes on reauthorization", deliveryDate:"10/09/2026",
+        countries:["Chile","Mexico","Peru","Colombia"], integrations:[ASY, AAS, CSY, CAS], services:[PC], dms:false, status:"Open" },
+      { id:"K1-286", title:"DMS update pull", description:"Provides a simpler way to update applications on terminals", deliveryDate:"10/09/2026",
+        countries:["Chile","Mexico","Peru","Colombia"], integrations:[ASY, AAS, CSY, CAS], services:[], dms:true, status:"Open" }
+    ],
+    releases: [
+      { firstDelivery:"21/08/2026", type:"Release Candidate", productionDate:"07/09/2026", tickets:23, approvedFirstReview:17, status:"Shipped to production", daysToProduction:17 },
+      { firstDelivery:"03/09/2026", type:"Release Candidate", productionDate:"07/09/2026", tickets:10, approvedFirstReview:9, status:"Shipped to production", daysToProduction:4 },
+      { firstDelivery:"31/08/2026", type:"Hotfix", productionDate:"02/09/2026", tickets:3, approvedFirstReview:3, status:"Shipped to production", daysToProduction:2 },
+      { firstDelivery:"07/09/2026", type:"Hotfix", productionDate:"08/09/2026", tickets:1, approvedFirstReview:1, status:"Shipped to production", daysToProduction:1 }
+    ]
+  };
+
+  const COUNTRIES = ["Mexico", "Chile", "Colombia", "Peru"];
+  const MODES = [SA, CSY, CAS, ASY, AAS];
+  const SERVICES = [CH, PC, RF, OS];
+  const STATES = [PROD, INT];
+  const PIE_COLORS = ["#3457f1", "#20a58b", "#9b69ed", "#e9a23b", "#d94b5c"];
+
+  const esc = v => String(v ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[c]);
+  const unique = rows => new Set(rows.map(m => m.country + ":" + m.name)).size;
+  /* Clients section: only Production and Integration (Churned and Pipeline excluded). */
+  const closed = m => m.status === PROD || m.status === INT;
+  const pill = (label, value, color) => `<div class="integration-cell"><div class="integration-name" style="color:${color}">${esc(label)}</div><div class="integration-value">${value}</div></div>`;
+  const pct = x => (100 * x).toFixed(0) + "%";
+
+  /* ==================== PRODUCT READINESS ====================
+     Two matrices (by operation mode and by service) with identical rules.
+     Per country × column:
+       C1  at least one client in production with that mode / service
+       C2  clients combined ran >= 200 transactions in the last 7 days
+       C3  no critical issues for that country and that mode / service
+     green = all three · amber = at least one missing · red = no criterion
+     met or critical issues present · grey "–" = no clients at all.
+     Issues per cell: list of { id, resolvesOn } (ISO); the panel shows the
+     count and the date the last ticket is resolved.
+     DUMMY transaction volumes and issue lists — pending real source data. */
+  const READY_MODES = [SA, CSY, CAS, ASY];   // App to App Async excluded on purpose
+  const READY_SERVICES = [CH, PC, RF, OS];
+  const TX_THRESHOLD = 200;
+
+  const MODE_DATA = {
+    "Mexico|Standalone":        { tx: 1840, issues: [] },
+    "Mexico|Cloud Sync":        { tx: 0,    issues: [] },
+    "Mexico|Cloud Async":       { tx: 45,   issues: [{ id:"K1-306", resolvesOn:"2026-09-15" }] },
+    "Mexico|App to App Sync":   { tx: 260,  issues: [{ id:"K1-308", resolvesOn:"2026-09-10" }] },
+    "Chile|Standalone":         { tx: 2310, issues: [] },
+    "Chile|Cloud Sync":         { tx: 120,  issues: [] },
+    "Chile|Cloud Async":        { tx: 30,   issues: [{ id:"K1-306", resolvesOn:"2026-09-15" }, { id:"K1-308", resolvesOn:"2026-09-10" }] },
+    "Chile|App to App Sync":    { tx: 4120, issues: [] },
+    "Colombia|Standalone":      { tx: 1560, issues: [] },
+    "Colombia|Cloud Sync":      { tx: 90,   issues: [] },
+    "Colombia|Cloud Async":     { tx: 0,    issues: [] },
+    "Colombia|App to App Sync": { tx: 210,  issues: [] },
+    "Peru|Standalone":          { tx: 640,  issues: [] },
+    "Peru|Cloud Sync":          { tx: 0,    issues: [] },
+    "Peru|Cloud Async":         { tx: 0,    issues: [] },
+    "Peru|App to App Sync":     { tx: 0,    issues: [] }
+  };
+  const SERVICE_DATA = {
+    "Mexico|Charge":              { tx: 2100, issues: [{ id:"K1-306", resolvesOn:"2026-09-15" }] },
+    "Mexico|Preauth & Capture":   { tx: 80,   issues: [{ id:"K1-308", resolvesOn:"2026-09-10" }] },
+    "Mexico|Refunds":             { tx: 410,  issues: [] },
+    "Mexico|Other Services":      { tx: 150,  issues: [] },
+    "Chile|Charge":               { tx: 6480, issues: [] },
+    "Chile|Preauth & Capture":    { tx: 0,    issues: [{ id:"K1-308", resolvesOn:"2026-09-10" }] },
+    "Chile|Refunds":              { tx: 980,  issues: [] },
+    "Chile|Other Services":       { tx: 320,  issues: [] },
+    "Colombia|Charge":            { tx: 1720, issues: [] },
+    "Colombia|Preauth & Capture": { tx: 40,   issues: [{ id:"K1-308", resolvesOn:"2026-09-10" }] },
+    "Colombia|Refunds":           { tx: 260,  issues: [] },
+    "Colombia|Other Services":    { tx: 110,  issues: [] },
+    "Peru|Charge":                { tx: 720,  issues: [] },
+    "Peru|Preauth & Capture":     { tx: 0,    issues: [] },
+    "Peru|Refunds":               { tx: 190,  issues: [] },
+    "Peru|Other Services":        { tx: 0,    issues: [] }
+  };
+
+  const nf = n => n.toLocaleString("en-US");
+  const fmtISO = iso => { const [y, m, d] = iso.split("-"); return d + "/" + m + "/" + y; };
+  const lastResolution = issues => issues.length ? issues.map(i => i.resolvesOn).sort().slice(-1)[0] : null;
+  const ICON = { green:"✓", amber:"!", red:"✕", none:"–" };
+  const STATE_LABEL = {
+    green: "Ready — all three criteria met",
+    amber: "Partial — at least one criterion not met",
+    red: "Not ready — critical issues or no criteria met",
+    none: "No clients in integration or production"
+  };
+
+  /* Client counts come from the real data: by mode for the first matrix,
+     by service for the second one. */
+  function clientCounts(country, column, byService) {
+    const rows = REPORT_DATA.clients.filter(m => m.country === country &&
+      (byService ? m.services.includes(column) : m.integrations.includes(column)));
+    const uniq = list => new Set(list.map(m => m.name)).size;
+    return {
+      prod: uniq(rows.filter(m => m.status === PROD)),
+      integrating: uniq(rows.filter(m => m.status === INT)),
+      pipeline: uniq(rows.filter(m => m.status === PIPE))
+    };
+  }
+
+  function evaluate(cfg, country, column) {
+    const extra = cfg.data[country + "|" + column] || { tx: 0, issues: [] };
+    const c = clientCounts(country, column, cfg.byService);
+    const d = { ...c, tx: extra.tx, issues: extra.issues || [] };
+    const active = d.prod + d.integrating;
+    if (!active) return { state:"none", d, active, issues:d.issues, c1:false, c2:false, c3:d.issues.length === 0 };
+    const c1 = d.prod >= 1, c2 = d.tx >= TX_THRESHOLD, c3 = d.issues.length === 0;
+    const met = [c1, c2, c3].filter(Boolean).length;
+    const state = d.issues.length ? "red" : met === 3 ? "green" : met === 0 ? "red" : "amber";
+    return { state, d, active, issues: d.issues, c1, c2, c3 };
+  }
+
+  /* Every reason that keeps a cell out of the green state, in one short line each. */
+  function cellReasons(r) {
+    const out = [];
+    if (r.issues.length) out.push(r.issues.length + " issue" + (r.issues.length === 1 ? "" : "s") +
+      " — all resolved by " + fmtISO(lastResolution(r.issues)));
+    if (!r.c1) out.push("No clients in production");
+    if (!r.c2) out.push("Low transactions — " + nf(r.d.tx));
+    return out;
+  }
+
+  function renderMatrix(cfg) {
+    const panelId = cfg.root + "Detail";
+    const rows = COUNTRIES.map(country => "<tr><td>" + esc(country) + "</td>" +
+      cfg.columns.map(column => {
+        const r = evaluate(cfg, country, column);
+        const label = country + " · " + column + " — " + STATE_LABEL[r.state];
+        const reasons = (r.state === "red" || r.state === "amber") ? cellReasons(r) : [];
+        return '<td class="cell">' + '<button type="button" class="dot ' + r.state + '" data-country="' + esc(country) +
+          '" data-column="' + esc(column) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '">' +
+          ICON[r.state] + "</button>" +
+          (reasons.length ? '<div class="cell-reasons">' + reasons.map(t => "<span>" + esc(t) + "</span>").join("") + "</div>" : "") +
+          "</td>";
+      }).join("") + "</tr>").join("");
+
+    document.getElementById(cfg.root).innerHTML =
+      '<div class="section-head"><div><h2>' + esc(cfg.title) + "</h2><p>Readiness of each " + cfg.unit +
+      " per country, judged on three criteria: at least one client in production with that " + cfg.unit + ", at least " +
+      TX_THRESHOLD + " transactions across those clients in the last week, and no critical issues for that country and " +
+      cfg.unit + ".</p></div></div>" +
+      '<article class="card matrix-card"><div class="table-scroll"><table class="cov-table"><thead><tr><th>Country</th>' +
+      cfg.columns.map(c => "<th>" + esc(c) + "</th>").join("") + "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
+      '<div class="legend">' + ["green","amber","red","none"].map(s =>
+        '<span class="k"><span class="dot ' + s + '">' + ICON[s] + "</span>" + esc(STATE_LABEL[s]) + "</span>").join("") +
+      "</div></article>" +
+      '<article class="card detail" id="' + panelId + '"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article>';
+
+    const clear = () => document.getElementById(panelId).innerHTML =
+      '<div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div>';
+
+    document.querySelectorAll("#" + cfg.root + " button.dot").forEach(btn => btn.addEventListener("click", () => {
+      document.querySelectorAll("#" + cfg.root + " button.dot").forEach(b => b.classList.remove("is-selected"));
+      btn.classList.add("is-selected");
+      renderReadinessDetail(cfg, panelId, btn.dataset.country, btn.dataset.column, clear);
+    }));
+  }
+
+  function renderReadinessDetail(cfg, panelId, country, column, clear) {
+    const r = evaluate(cfg, country, column), d = r.d, issues = r.issues;
+    const resolvedBy = lastResolution(issues);
+    const tick = (ok, text) => "<li><b class=" + (ok ? '"ok">✓' : '"no">✕') + "</b><span>" + text + "</span></li>";
+    document.getElementById(panelId).innerHTML =
+      '<div class="detail-head"><div class="detail-title">' + esc(country) + " · " + esc(column) + "</div>" +
+      '<div style="display:flex;align-items:center;gap:12px"><span class="dot ' + r.state + '" style="cursor:default">' + ICON[r.state] + "</span>" +
+      '<button type="button" class="detail-close">Close</button></div></div>' +
+      '<div class="detail-grid">' +
+      '<div class="detail-cell"><div class="detail-label">Clients in production + integration</div><div class="detail-value">' + r.active +
+      '</div><div class="detail-sub">' + d.prod + " in production · " + d.integrating + " integrating</div></div>" +
+      '<div class="detail-cell"><div class="detail-label">Clients in pipeline</div><div class="detail-value">' + d.pipeline +
+      '</div><div class="detail-sub">Not counted for readiness</div></div>' +
+      '<div class="detail-cell"><div class="detail-label">Transactions last week</div><div class="detail-value">' + nf(d.tx) +
+      '</div><div class="detail-sub">Threshold ' + nf(TX_THRESHOLD) + "</div></div>" +
+      '<div class="detail-cell"><div class="detail-label">Critical issues</div><div class="detail-value">' + issues.length +
+      '</div><div class="detail-sub">' + (issues.length ? "All resolved by " + fmtISO(resolvedBy) : "None open") + "</div></div></div>" +
+      (issues.length ? '<div class="issue-block"><strong>' + issues.length + " critical issue" + (issues.length === 1 ? "" : "s") +
+        " affecting this " + cfg.unit + " in " + esc(country) + ". All of them resolved by " + fmtISO(resolvedBy) +
+        " (date the last ticket ships).</strong><ul>" +
+        issues.slice().sort((a, b) => a.resolvesOn.localeCompare(b.resolvesOn))
+          .map(i => "<li>" + esc(i.id) + " — resolved on " + fmtISO(i.resolvesOn) + "</li>").join("") + "</ul></div>" : "") +
+      '<ul class="criteria">' +
+      tick(r.c1, r.c1
+        ? "At least one client in production with this " + cfg.unit + " — " + d.prod + " in production"
+        : "No clients in production with this " + cfg.unit + " — " + d.integrating + " integrating") +
+      tick(r.c2, r.c2
+        ? "At least " + nf(TX_THRESHOLD) + " transactions last week — " + nf(d.tx) + " recorded"
+        : "Fewer than " + nf(TX_THRESHOLD) + " transactions last week — " + nf(d.tx) + " recorded") +
+      tick(r.c3, r.c3
+        ? "No critical issues for this country and " + cfg.unit
+        : issues.length + " critical issue" + (issues.length === 1 ? "" : "s") + " open for this country and " +
+          cfg.unit + " — all resolved by " + fmtISO(resolvedBy)) + "</ul>";
+    document.querySelector("#" + panelId + " .detail-close").addEventListener("click", () => {
+      document.querySelectorAll("#" + cfg.root + " button.dot").forEach(b => b.classList.remove("is-selected"));
+      clear();
+    });
+  }
+
+  const MODE_MATRIX = { root:"readinessByMode", title:"Product readiness by operation mode", unit:"operation mode",
+    columns: READY_MODES, data: MODE_DATA, byService: false };
+  const SERVICE_MATRIX = { root:"readinessByService", title:"Product readiness by service", unit:"service",
+    columns: READY_SERVICES, data: SERVICE_DATA, byService: true };
+  /* Coverage % = green cells (all three readiness criteria met) over all country × column cells. */
+  const coverage = cfg => {
+    const green = COUNTRIES.reduce((n, c) => n + cfg.columns.filter(col => evaluate(cfg, c, col).state === "green").length, 0);
+    const total = COUNTRIES.length * cfg.columns.length;
+    return { green, total, ratio: green / total };
+  };
+
+  /* Latest resolution date across open issues (sheet dates are DD/MM/YYYY here). */
+  const lastIssueDate = () => {
+    const dates = REPORT_DATA.issues.filter(i => i.status !== "Resolved" && i.deliveryDate)
+      .map(i => { const [d, m, y] = i.deliveryDate.split("/"); return y + "-" + m + "-" + d; }).sort();
+    return dates.length ? fmtISO(dates[dates.length - 1]) : null;
+  };
+
+  function renderOverview() {
+    const regional = state => new Set(REPORT_DATA.clients.filter(m => m.status === state).map(m => m.name)).size;
+    const slash = (a, b) => a + ' <span style="color:var(--muted);font-weight:700">/</span> ' + b;
+
+    document.getElementById("kpiProd").innerHTML = slash(regional(PROD), regional(INT));
+    document.getElementById("kpiProdNote").textContent =
+      `First number: unique clients live in production. Second number: clients currently integrating. ${regional(CHU)} client${regional(CHU) === 1 ? "" : "s"} churned.`;
+
+    const cm = coverage(MODE_MATRIX);
+    document.getElementById("kpiCovMode").textContent = pct(cm.ratio);
+    document.getElementById("kpiCovModeNote").textContent =
+      `${cm.green} of ${cm.total} country × operation mode combinations meet all three readiness criteria`;
+    document.getElementById("kpiCovModeBar").style.width = pct(cm.ratio);
+
+    const cs = coverage(SERVICE_MATRIX);
+    document.getElementById("kpiCovService").textContent = pct(cs.ratio);
+    document.getElementById("kpiCovServiceNote").textContent =
+      `${cs.green} of ${cs.total} country × service combinations meet all three readiness criteria`;
+    document.getElementById("kpiCovServiceBar").style.width = pct(cs.ratio);
+
+    const R = REPORT_DATA.releases;
+    const tickets = R.reduce((n, r) => n + r.tickets, 0);
+    const approved = R.reduce((n, r) => n + r.approvedFirstReview, 0);
+    const rc = R.filter(r => r.type !== "Hotfix"), hf = R.filter(r => r.type === "Hotfix");
+    const avg = list => list.length ? (list.reduce((n, r) => n + r.daysToProduction, 0) / list.length).toFixed(1) : "–";
+    document.getElementById("kpiFirstPass").textContent = (100 * approved / tickets).toFixed(0) + "%";
+    document.getElementById("kpiFirstPassNote").textContent =
+      `${approved} of ${tickets} tickets approved on first review across the last ${R.length} releases`;
+
+    document.getElementById("kpiTimeToProd").innerHTML = avg(R) +
+      ' <span style="font-size:16px;color:var(--muted);font-weight:700">days</span>';
+    document.getElementById("kpiTimeToProdNote").textContent =
+      `Calendar days from first delivery of a release to production, averaged over the last ${R.length} releases · ${avg(rc)} on release candidates, ${avg(hf)} on hotfixes`;
+
+    const open = REPORT_DATA.issues.filter(i => i.status !== "Resolved");
+    const until = lastIssueDate();
+    document.getElementById("kpiIssues").textContent = open.length;
+    document.getElementById("kpiIssuesNote").textContent = open.length
+      ? `High, urgent or immediate issues affecting clients in integration or production. All resolved by ${until}.`
+      : "No high, urgent or immediate issues open at this cut-off date.";
+  }
+
+  /* DUMMY TPV per country (USD, last week) — pending a real source.
+     Transactions are summed from MODE_DATA so the table matches the matrices. */
+  const TPV_USD = { "Mexico": 38600, "Chile": 98700, "Colombia": 26000, "Peru": 12800 };
+  const countryTx = country => READY_MODES.reduce((n, m) => n + ((MODE_DATA[country + "|" + m] || {}).tx || 0), 0);
+
+  function renderCountryStatus() {
+    /* country = null → regional union of everything live in any country */
+    const liveTags = (country, list, byService) => {
+      const on = list.filter(col => REPORT_DATA.clients.some(m => (country ? m.country === country : true) &&
+        m.status === PROD && (byService ? m.services : m.integrations).includes(col)));
+      return on.length
+        ? '<div class="tags">' + on.map(c => '<span class="integration-tag">' + esc(c) + "</span>").join("") + "</div>"
+        : '<span style="color:var(--muted)">None yet</span>';
+    };
+    const count = (country, status) => new Set(REPORT_DATA.clients
+      .filter(m => m.country === country && m.status === status).map(m => m.name)).size;
+
+    const rows = COUNTRIES.map(c =>
+      "<tr><td>" + esc(c) + "</td>" +
+      '<td class="num">' + count(c, PROD) + "</td>" +
+      '<td class="num">' + count(c, INT) + "</td>" +
+      '<td class="num">' + count(c, PIPE) + "</td>" +
+      '<td class="num">' + nf(countryTx(c)) + "</td>" +
+      '<td class="num">USD ' + nf(TPV_USD[c] || 0) + "</td>" +
+      "<td>" + liveTags(c, MODES, false) + "</td>" +
+      "<td>" + liveTags(c, SERVICES, true) + "</td></tr>").join("");
+
+    const totalRow = "<tr class=\"cov-total\"><td>Regional</td>" +
+      '<td class="num">' + new Set(REPORT_DATA.clients.filter(m => m.status === PROD).map(m => m.name)).size + "</td>" +
+      '<td class="num">' + new Set(REPORT_DATA.clients.filter(m => m.status === INT).map(m => m.name)).size + "</td>" +
+      '<td class="num">' + new Set(REPORT_DATA.clients.filter(m => m.status === PIPE).map(m => m.name)).size + "</td>" +
+      '<td class="num">' + nf(COUNTRIES.reduce((n, c) => n + countryTx(c), 0)) + "</td>" +
+      '<td class="num">USD ' + nf(COUNTRIES.reduce((n, c) => n + (TPV_USD[c] || 0), 0)) + "</td>" +
+      "<td>" + liveTags(null, MODES, false) + "</td>" +
+      "<td>" + liveTags(null, SERVICES, true) + "</td></tr>";
+
+    document.getElementById("countryStatus").innerHTML =
+      '<div class="section-head"><div><h2>Country status</h2><p>Clients, weekly volume and what is actually live in each country. ' +
+      'Operation modes and services are listed only when at least one client in production uses them.</p></div></div>' +
+      '<article class="card matrix-card"><div class="table-scroll"><table class="status-table"><thead><tr>' +
+      "<th>Country</th><th>Clients in production</th><th>In integration</th><th>Pipeline</th>" +
+      "<th>Transactions last week</th><th>TPV last week</th><th>Operation modes live</th><th>Services live</th>" +
+      "</tr></thead><tbody>" + rows + totalRow + "</tbody></table></div>" +
+      '<div class="matrix-note" style="border-radius:0;border-top:1px solid var(--line);border-bottom:0">' +
+      "Clients in production, in integration and in pipeline are unique client names per country; in the regional row a client present in several " +
+      "countries counts once, and the modes and services listed are the union of everything live in any country. Transactions and TPV cover the last 7 full days " +
+      "and are placeholder data until we have a source. Modes and services live require at least one client in production, not just integrating.</div></article>";
+  }
+
+  function renderReleases() {
+    const R = REPORT_DATA.releases;
+    const totalTickets = R.reduce((n, r) => n + r.tickets, 0);
+    const totalApproved = R.reduce((n, r) => n + r.approvedFirstReview, 0);
+    document.getElementById("releaseSection").innerHTML =
+      '<div class="section-head"><div><h2>Release status</h2><p>Delivery, production shipping and first-review results.</p></div></div>' +
+      '<article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Release type</th><th>First delivery</th><th>Shipped to production</th><th>Days to production</th><th>Status</th><th>Tickets</th><th>Approved on first review</th><th>First-pass approval</th></tr></thead><tbody>' +
+      R.map(r => '<tr><td><span class="integration-tag">' + esc(r.type) + "</span></td><td>" + esc(r.firstDelivery) + "</td><td>" + esc(r.productionDate) +
+        '</td><td style="' + (r.daysToProduction < 0 ? "color:#b42318" : "") + '">' + r.daysToProduction + "</td><td>" + esc(r.status) + "</td><td>" + r.tickets + "</td><td>" + r.approvedFirstReview +
+        "</td><td>" + (100 * r.approvedFirstReview / r.tickets).toFixed(1) + "%</td></tr>").join("") +
+      '</tbody></table></div><div class="matrix-note" style="border-radius:0">Days to production = shipping date minus first delivery date (calendar days). First-pass approval = tickets approved on the first review / total tickets. Total: ' +
+      totalTickets + " tickets; " + totalApproved + " approved on first review (" + (100 * totalApproved / totalTickets).toFixed(1) + "%). Shipping to production does not imply a per-terminal deployment status.</div></article>";
+  }
+
+  const tags = (values, cls = "") => '<div class="tags">' + values.map(v => '<span class="tag ' + cls + '">' + esc(v) + "</span>").join("") + "</div>";
+
+  function renderIssues() {
+    const list = REPORT_DATA.issues;
+    document.getElementById("issueCount").textContent = `${list.length} issue${list.length === 1 ? "" : "s"}`;
+    const tbody = document.getElementById("issueRows");
+    if (!list.length) {
+      tbody.innerHTML = '<tr><td colspan="5"><div class="empty"><strong>No issues to show</strong>There are no open critical issues at this cut-off date.</div></td></tr>';
+      return;
+    }
+    tbody.innerHTML = list.map(issue => '<tr>' +
+      '<td class="issue-title"><div class="issue-id">' + esc(issue.id) + "</div>" + esc(issue.title) +
+      '<p style="font-weight:400;font-size:12px;color:var(--muted)">' + esc(issue.description) + "</p></td>" +
+      "<td>" + esc(issue.deliveryDate || "Not reported") + "</td>" +
+      "<td>" + tags(issue.countries, "country") + "</td>" +
+      "<td>" + tags(issue.integrations) + "</td>" +
+      '<td><div class="tags">' + issue.services.map(s => '<span class="tag service">' + esc(s) + "</span>").join("") +
+      (issue.dms ? '<span class="tag dms">DMS</span>' : "") + "</div></td></tr>").join("");
+  }
+
+  renderMatrix(MODE_MATRIX);
+  renderMatrix(SERVICE_MATRIX);
+  renderOverview();
+  renderCountryStatus();
+  renderReleases();
+  renderIssues();
+  </script>
+
+</body></html>
