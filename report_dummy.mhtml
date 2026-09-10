@@ -1,0 +1,346 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: file:///Users/waldo/Library/Application%20Support/Claude-3p/local-agent-mode-sessions/b40540bb/00000000/d58dc65b/outputs/product-readiness-section-dummy.html
+Subject: =?utf-8?Q?Product=20readiness=20=E2=80=94=20section=20template=20(dummy?=
+ =?utf-8?Q?=20data)?=
+Date: Thu, 10 Sep 2026 20:32:43 GMT
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--ohztfPnx69ujCgf8F3B3TCPyCSnMeXPKup6pXNX6fL----"
+
+
+------MultipartBoundary--ohztfPnx69ujCgf8F3B3TCPyCSnMeXPKup6pXNX6fL----
+Content-Type: text/html
+Content-ID: <frame-AC100C12CAEC2738A05CE115CE5DE24E@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///Users/waldo/Library/Application%20Support/Claude-3p/local-agent-mode-sessions/b40540bb/00000000/d58dc65b/outputs/product-readiness-section-dummy.html
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-4aab5a84-cd58-4366-b674-99d1e6721b96@mhtml.blink" />
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1">
+  <title>Product readiness =E2=80=94 section template (dummy data)</title>
+ =20
+</head>
+<body>
+<div class=3D"wrap">
+  <div class=3D"dummy-flag"><strong>Template with dummy data.</strong> Clie=
+nt counts, transaction volumes and issue counts per cell are invented =E2=
+=80=94 only the layout, the rules and the click-through behaviour are real.=
+</div>
+
+  <section class=3D"section" id=3D"readinessByMode"><div class=3D"section-h=
+ead"><div><h2>Product readiness by operation mode</h2><p>Readiness of each =
+operation mode per country, judged on three criteria: at least one client i=
+n production with that operation mode, at least 200 transactions across tho=
+se clients in the last week, and no critical issues for that country and op=
+eration mode.</p></div></div><article class=3D"card matrix-card"><div class=
+=3D"table-scroll"><table><thead><tr><th>Country</th><th>Standalone</th><th>=
+Cloud Sync</th><th>Cloud Async</th><th>App to App Sync</th></tr></thead><tb=
+ody><tr><td>Mexico</td><td><button type=3D"button" class=3D"dot green" data=
+-country=3D"Mexico" data-column=3D"Standalone" title=3D"Mexico =C2=B7 Stand=
+alone =E2=80=94 Ready =E2=80=94 all three criteria met" aria-label=3D"Mexic=
+o =C2=B7 Standalone =E2=80=94 Ready =E2=80=94 all three criteria met">=E2=
+=9C=93</button></td><td><button type=3D"button" class=3D"dot none" data-cou=
+ntry=3D"Mexico" data-column=3D"Cloud Sync" title=3D"Mexico =C2=B7 Cloud Syn=
+c =E2=80=94 No clients in integration or production" aria-label=3D"Mexico =
+=C2=B7 Cloud Sync =E2=80=94 No clients in integration or production">=E2=80=
+=93</button></td><td><button type=3D"button" class=3D"dot red" data-country=
+=3D"Mexico" data-column=3D"Cloud Async" title=3D"Mexico =C2=B7 Cloud Async =
+=E2=80=94 Not ready =E2=80=94 critical issues or no criteria met" aria-labe=
+l=3D"Mexico =C2=B7 Cloud Async =E2=80=94 Not ready =E2=80=94 critical issue=
+s or no criteria met">=E2=9C=95</button></td><td><button type=3D"button" cl=
+ass=3D"dot red" data-country=3D"Mexico" data-column=3D"App to App Sync" tit=
+le=3D"Mexico =C2=B7 App to App Sync =E2=80=94 Not ready =E2=80=94 critical =
+issues or no criteria met" aria-label=3D"Mexico =C2=B7 App to App Sync =E2=
+=80=94 Not ready =E2=80=94 critical issues or no criteria met">=E2=9C=95</b=
+utton></td></tr><tr><td>Chile</td><td><button type=3D"button" class=3D"dot =
+green" data-country=3D"Chile" data-column=3D"Standalone" title=3D"Chile =C2=
+=B7 Standalone =E2=80=94 Ready =E2=80=94 all three criteria met" aria-label=
+=3D"Chile =C2=B7 Standalone =E2=80=94 Ready =E2=80=94 all three criteria me=
+t">=E2=9C=93</button></td><td><button type=3D"button" class=3D"dot amber" d=
+ata-country=3D"Chile" data-column=3D"Cloud Sync" title=3D"Chile =C2=B7 Clou=
+d Sync =E2=80=94 Partial =E2=80=94 at least one criterion not met" aria-lab=
+el=3D"Chile =C2=B7 Cloud Sync =E2=80=94 Partial =E2=80=94 at least one crit=
+erion not met">!</button></td><td><button type=3D"button" class=3D"dot red"=
+ data-country=3D"Chile" data-column=3D"Cloud Async" title=3D"Chile =C2=B7 C=
+loud Async =E2=80=94 Not ready =E2=80=94 critical issues or no criteria met=
+" aria-label=3D"Chile =C2=B7 Cloud Async =E2=80=94 Not ready =E2=80=94 crit=
+ical issues or no criteria met">=E2=9C=95</button></td><td><button type=3D"=
+button" class=3D"dot green" data-country=3D"Chile" data-column=3D"App to Ap=
+p Sync" title=3D"Chile =C2=B7 App to App Sync =E2=80=94 Ready =E2=80=94 all=
+ three criteria met" aria-label=3D"Chile =C2=B7 App to App Sync =E2=80=94 R=
+eady =E2=80=94 all three criteria met">=E2=9C=93</button></td></tr><tr><td>=
+Colombia</td><td><button type=3D"button" class=3D"dot green" data-country=
+=3D"Colombia" data-column=3D"Standalone" title=3D"Colombia =C2=B7 Standalon=
+e =E2=80=94 Ready =E2=80=94 all three criteria met" aria-label=3D"Colombia =
+=C2=B7 Standalone =E2=80=94 Ready =E2=80=94 all three criteria met">=E2=9C=
+=93</button></td><td><button type=3D"button" class=3D"dot amber" data-count=
+ry=3D"Colombia" data-column=3D"Cloud Sync" title=3D"Colombia =C2=B7 Cloud S=
+ync =E2=80=94 Partial =E2=80=94 at least one criterion not met" aria-label=
+=3D"Colombia =C2=B7 Cloud Sync =E2=80=94 Partial =E2=80=94 at least one cri=
+terion not met">!</button></td><td><button type=3D"button" class=3D"dot non=
+e" data-country=3D"Colombia" data-column=3D"Cloud Async" title=3D"Colombia =
+=C2=B7 Cloud Async =E2=80=94 No clients in integration or production" aria-=
+label=3D"Colombia =C2=B7 Cloud Async =E2=80=94 No clients in integration or=
+ production">=E2=80=93</button></td><td><button type=3D"button" class=3D"do=
+t green" data-country=3D"Colombia" data-column=3D"App to App Sync" title=3D=
+"Colombia =C2=B7 App to App Sync =E2=80=94 Ready =E2=80=94 all three criter=
+ia met" aria-label=3D"Colombia =C2=B7 App to App Sync =E2=80=94 Ready =E2=
+=80=94 all three criteria met">=E2=9C=93</button></td></tr><tr><td>Peru</td=
+><td><button type=3D"button" class=3D"dot green" data-country=3D"Peru" data=
+-column=3D"Standalone" title=3D"Peru =C2=B7 Standalone =E2=80=94 Ready =E2=
+=80=94 all three criteria met" aria-label=3D"Peru =C2=B7 Standalone =E2=80=
+=94 Ready =E2=80=94 all three criteria met">=E2=9C=93</button></td><td><but=
+ton type=3D"button" class=3D"dot none" data-country=3D"Peru" data-column=3D=
+"Cloud Sync" title=3D"Peru =C2=B7 Cloud Sync =E2=80=94 No clients in integr=
+ation or production" aria-label=3D"Peru =C2=B7 Cloud Sync =E2=80=94 No clie=
+nts in integration or production">=E2=80=93</button></td><td><button type=
+=3D"button" class=3D"dot none" data-country=3D"Peru" data-column=3D"Cloud A=
+sync" title=3D"Peru =C2=B7 Cloud Async =E2=80=94 No clients in integration =
+or production" aria-label=3D"Peru =C2=B7 Cloud Async =E2=80=94 No clients i=
+n integration or production">=E2=80=93</button></td><td><button type=3D"but=
+ton" class=3D"dot none" data-country=3D"Peru" data-column=3D"App to App Syn=
+c" title=3D"Peru =C2=B7 App to App Sync =E2=80=94 No clients in integration=
+ or production" aria-label=3D"Peru =C2=B7 App to App Sync =E2=80=94 No clie=
+nts in integration or production">=E2=80=93</button></td></tr></tbody></tab=
+le></div><div class=3D"legend"><span class=3D"k"><span class=3D"dot green">=
+=E2=9C=93</span>Ready =E2=80=94 all three criteria met</span><span class=3D=
+"k"><span class=3D"dot amber">!</span>Partial =E2=80=94 at least one criter=
+ion not met</span><span class=3D"k"><span class=3D"dot red">=E2=9C=95</span=
+>Not ready =E2=80=94 critical issues or no criteria met</span><span class=
+=3D"k"><span class=3D"dot none">=E2=80=93</span>No clients in integration o=
+r production</span></div></article><article class=3D"card detail" id=3D"rea=
+dinessByModeDetail"><div class=3D"placeholder">Select a cell in the matrix =
+to see clients, transactions and issues behind it.</div></article></section=
+>
+  <section class=3D"section" id=3D"readinessByService"><div class=3D"sectio=
+n-head"><div><h2>Product readiness by service</h2><p>Readiness of each serv=
+ice per country, judged on three criteria: at least one client in productio=
+n with that service, at least 200 transactions across those clients in the =
+last week, and no critical issues for that country and service.</p></div></=
+div><article class=3D"card matrix-card"><div class=3D"table-scroll"><table>=
+<thead><tr><th>Country</th><th>Charge</th><th>Preauth &amp; Capture</th><th=
+>Void</th><th>Other Integration Services</th></tr></thead><tbody><tr><td>Me=
+xico</td><td><button type=3D"button" class=3D"dot red" data-country=3D"Mexi=
+co" data-column=3D"Charge" title=3D"Mexico =C2=B7 Charge =E2=80=94 Not read=
+y =E2=80=94 critical issues or no criteria met" aria-label=3D"Mexico =C2=B7=
+ Charge =E2=80=94 Not ready =E2=80=94 critical issues or no criteria met">=
+=E2=9C=95</button></td><td><button type=3D"button" class=3D"dot red" data-c=
+ountry=3D"Mexico" data-column=3D"Preauth &amp; Capture" title=3D"Mexico =C2=
+=B7 Preauth &amp; Capture =E2=80=94 Not ready =E2=80=94 critical issues or =
+no criteria met" aria-label=3D"Mexico =C2=B7 Preauth &amp; Capture =E2=80=
+=94 Not ready =E2=80=94 critical issues or no criteria met">=E2=9C=95</butt=
+on></td><td><button type=3D"button" class=3D"dot green" data-country=3D"Mex=
+ico" data-column=3D"Void" title=3D"Mexico =C2=B7 Void =E2=80=94 Ready =E2=
+=80=94 all three criteria met" aria-label=3D"Mexico =C2=B7 Void =E2=80=94 R=
+eady =E2=80=94 all three criteria met">=E2=9C=93</button></td><td><button t=
+ype=3D"button" class=3D"dot amber" data-country=3D"Mexico" data-column=3D"O=
+ther Integration Services" title=3D"Mexico =C2=B7 Other Integration Service=
+s =E2=80=94 Partial =E2=80=94 at least one criterion not met" aria-label=3D=
+"Mexico =C2=B7 Other Integration Services =E2=80=94 Partial =E2=80=94 at le=
+ast one criterion not met">!</button></td></tr><tr><td>Chile</td><td><butto=
+n type=3D"button" class=3D"dot green" data-country=3D"Chile" data-column=3D=
+"Charge" title=3D"Chile =C2=B7 Charge =E2=80=94 Ready =E2=80=94 all three c=
+riteria met" aria-label=3D"Chile =C2=B7 Charge =E2=80=94 Ready =E2=80=94 al=
+l three criteria met">=E2=9C=93</button></td><td><button type=3D"button" cl=
+ass=3D"dot none" data-country=3D"Chile" data-column=3D"Preauth &amp; Captur=
+e" title=3D"Chile =C2=B7 Preauth &amp; Capture =E2=80=94 No clients in inte=
+gration or production" aria-label=3D"Chile =C2=B7 Preauth &amp; Capture =E2=
+=80=94 No clients in integration or production">=E2=80=93</button></td><td>=
+<button type=3D"button" class=3D"dot green" data-country=3D"Chile" data-col=
+umn=3D"Void" title=3D"Chile =C2=B7 Void =E2=80=94 Ready =E2=80=94 all three=
+ criteria met" aria-label=3D"Chile =C2=B7 Void =E2=80=94 Ready =E2=80=94 al=
+l three criteria met">=E2=9C=93</button></td><td><button type=3D"button" cl=
+ass=3D"dot green" data-country=3D"Chile" data-column=3D"Other Integration S=
+ervices" title=3D"Chile =C2=B7 Other Integration Services =E2=80=94 Ready =
+=E2=80=94 all three criteria met" aria-label=3D"Chile =C2=B7 Other Integrat=
+ion Services =E2=80=94 Ready =E2=80=94 all three criteria met">=E2=9C=93</b=
+utton></td></tr><tr><td>Colombia</td><td><button type=3D"button" class=3D"d=
+ot green" data-country=3D"Colombia" data-column=3D"Charge" title=3D"Colombi=
+a =C2=B7 Charge =E2=80=94 Ready =E2=80=94 all three criteria met" aria-labe=
+l=3D"Colombia =C2=B7 Charge =E2=80=94 Ready =E2=80=94 all three criteria me=
+t">=E2=9C=93</button></td><td><button type=3D"button" class=3D"dot red" dat=
+a-country=3D"Colombia" data-column=3D"Preauth &amp; Capture" title=3D"Colom=
+bia =C2=B7 Preauth &amp; Capture =E2=80=94 Not ready =E2=80=94 critical iss=
+ues or no criteria met" aria-label=3D"Colombia =C2=B7 Preauth &amp; Capture=
+ =E2=80=94 Not ready =E2=80=94 critical issues or no criteria met">=E2=9C=
+=95</button></td><td><button type=3D"button" class=3D"dot green" data-count=
+ry=3D"Colombia" data-column=3D"Void" title=3D"Colombia =C2=B7 Void =E2=80=
+=94 Ready =E2=80=94 all three criteria met" aria-label=3D"Colombia =C2=B7 V=
+oid =E2=80=94 Ready =E2=80=94 all three criteria met">=E2=9C=93</button></t=
+d><td><button type=3D"button" class=3D"dot amber" data-country=3D"Colombia"=
+ data-column=3D"Other Integration Services" title=3D"Colombia =C2=B7 Other =
+Integration Services =E2=80=94 Partial =E2=80=94 at least one criterion not=
+ met" aria-label=3D"Colombia =C2=B7 Other Integration Services =E2=80=94 Pa=
+rtial =E2=80=94 at least one criterion not met">!</button></td></tr><tr><td=
+>Peru</td><td><button type=3D"button" class=3D"dot green" data-country=3D"P=
+eru" data-column=3D"Charge" title=3D"Peru =C2=B7 Charge =E2=80=94 Ready =E2=
+=80=94 all three criteria met" aria-label=3D"Peru =C2=B7 Charge =E2=80=94 R=
+eady =E2=80=94 all three criteria met">=E2=9C=93</button></td><td><button t=
+ype=3D"button" class=3D"dot none" data-country=3D"Peru" data-column=3D"Prea=
+uth &amp; Capture" title=3D"Peru =C2=B7 Preauth &amp; Capture =E2=80=94 No =
+clients in integration or production" aria-label=3D"Peru =C2=B7 Preauth &am=
+p; Capture =E2=80=94 No clients in integration or production">=E2=80=93</bu=
+tton></td><td><button type=3D"button" class=3D"dot amber" data-country=3D"P=
+eru" data-column=3D"Void" title=3D"Peru =C2=B7 Void =E2=80=94 Partial =E2=
+=80=94 at least one criterion not met" aria-label=3D"Peru =C2=B7 Void =E2=
+=80=94 Partial =E2=80=94 at least one criterion not met">!</button></td><td=
+><button type=3D"button" class=3D"dot none" data-country=3D"Peru" data-colu=
+mn=3D"Other Integration Services" title=3D"Peru =C2=B7 Other Integration Se=
+rvices =E2=80=94 No clients in integration or production" aria-label=3D"Per=
+u =C2=B7 Other Integration Services =E2=80=94 No clients in integration or =
+production">=E2=80=93</button></td></tr></tbody></table></div><div class=3D=
+"legend"><span class=3D"k"><span class=3D"dot green">=E2=9C=93</span>Ready =
+=E2=80=94 all three criteria met</span><span class=3D"k"><span class=3D"dot=
+ amber">!</span>Partial =E2=80=94 at least one criterion not met</span><spa=
+n class=3D"k"><span class=3D"dot red">=E2=9C=95</span>Not ready =E2=80=94 c=
+ritical issues or no criteria met</span><span class=3D"k"><span class=3D"do=
+t none">=E2=80=93</span>No clients in integration or production</span></div=
+></article><article class=3D"card detail" id=3D"readinessByServiceDetail"><=
+div class=3D"placeholder">Select a cell in the matrix to see clients, trans=
+actions and issues behind it.</div></article></section>
+</div>
+
+
+
+</body></html>
+------MultipartBoundary--ohztfPnx69ujCgf8F3B3TCPyCSnMeXPKup6pXNX6fL----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-4aab5a84-cd58-4366-b674-99d1e6721b96@mhtml.blink
+
+@charset "utf-8";
+
+:root { color-scheme: light; --ink: #101828; --muted: #667085; --line: #e7e=
+9f0; --soft: #f6f7fb; --paper: #fff; --blue: #3457f1; --blue-2: #6c7cff; --=
+green: #16a36a; --amber: #e9a23b; --red: #d94b5c; --shadow: 0 12px 32px rgb=
+a(30,35,90,.08); --radius: 18px; }
+
+* { box-sizing: border-box; }
+
+body { margin: 0px; padding: 40px 0px; color: var(--ink); background: var(-=
+-soft); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFon=
+t, "Segoe UI", sans-serif; font-size: 14px; line-height: 1.45; }
+
+.wrap { width: min(1180px, 100% - 40px); margin: 0px auto; }
+
+.card { background: var(--paper); border: 1px solid rgba(231, 233, 240, 0.9=
+); border-radius: var(--radius); box-shadow: var(--shadow); }
+
+.section + .section { margin-top: 34px; }
+
+.section-head { display: flex; align-items: end; justify-content: space-bet=
+ween; gap: 16px; margin-bottom: 14px; }
+
+.section-head h2 { margin: 0px; font-size: 22px; letter-spacing: -0.02em; }
+
+.section-head p { margin: 4px 0px 0px; color: var(--muted); }
+
+.matrix-card { overflow: hidden; }
+
+.table-scroll { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; }
+
+th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-ali=
+gn: center; vertical-align: middle; white-space: nowrap; }
+
+th { color: var(--muted); background: rgb(251, 251, 253); font-size: 10px; =
+letter-spacing: 0.05em; text-transform: uppercase; }
+
+td:first-child, th:first-child { text-align: left; font-weight: 800; }
+
+tr:last-child td { border-bottom: 0px; }
+
+.dot { display: inline-flex; align-items: center; justify-content: center; =
+width: 30px; height: 30px; border-radius: 50%; border: 0px; cursor: pointer=
+; font-style: inherit; font-variant: inherit; font-stretch: inherit; line-h=
+eight: inherit; font-family: inherit; font-optical-sizing: inherit; font-si=
+ze-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; =
+font-variation-settings: inherit; font-language-override: inherit; font-siz=
+e: 14px; font-weight: 800; transition: transform 0.12s, box-shadow 0.12s; }
+
+.dot:hover { transform: scale(1.08); }
+
+.dot:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.dot.green { background: rgb(227, 246, 236); color: rgb(15, 122, 77); }
+
+.dot.amber { background: rgb(253, 242, 227); color: rgb(164, 96, 15); }
+
+.dot.red { background: rgb(253, 234, 236); color: rgb(180, 35, 24); }
+
+.dot.none { background: rgb(244, 245, 248); color: rgb(152, 162, 179); }
+
+.dot.is-selected { box-shadow: rgba(52, 87, 241, 0.35) 0px 0px 0px 3px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 18px 26px; padding: 15px 18p=
+x; border-top: 1px solid var(--line); background: rgb(250, 250, 255); font-=
+size: 12px; color: rgb(71, 84, 103); }
+
+.legend span.k { display: inline-flex; align-items: center; gap: 7px; }
+
+.legend .dot { width: 22px; height: 22px; font-size: 11px; cursor: default;=
+ }
+
+.legend .dot:hover { transform: none; }
+
+.detail { margin-top: 16px; padding: 0px; overflow: hidden; }
+
+.detail-head { display: flex; align-items: center; justify-content: space-b=
+etween; gap: 14px; padding: 16px 20px; border-bottom: 1px solid var(--line)=
+; background: rgb(251, 251, 253); }
+
+.detail-title { font-size: 16px; font-weight: 800; }
+
+.detail-close { border: 1px solid rgb(215, 218, 229); background: rgb(255, =
+255, 255); border-radius: 9px; padding: 6px 10px; cursor: pointer; font-sty=
+le: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inh=
+erit; line-height: inherit; font-family: inherit; font-optical-sizing: inhe=
+rit; font-size-adjust: inherit; font-kerning: inherit; font-feature-setting=
+s: inherit; font-variation-settings: inherit; font-language-override: inher=
+it; font-size: 12px; color: rgb(71, 84, 103); }
+
+.detail-grid { display: grid; grid-template-columns: repeat(4, minmax(0px, =
+1fr)); }
+
+.detail-cell { padding: 16px 20px; }
+
+.detail-cell + .detail-cell { border-left: 1px solid var(--line); }
+
+.detail-label { color: var(--muted); font-size: 11px; font-weight: 700; let=
+ter-spacing: 0.04em; text-transform: uppercase; }
+
+.detail-value { margin-top: 5px; font-size: 26px; font-weight: 800; letter-=
+spacing: -0.03em; }
+
+.detail-sub { margin-top: 4px; color: var(--muted); font-size: 11px; }
+
+.criteria { list-style: none; margin: 0px; padding: 14px 20px 18px; border-=
+top: 1px solid var(--line); font-size: 13px; }
+
+.criteria li { display: flex; gap: 9px; align-items: flex-start; padding: 5=
+px 0px; }
+
+.criteria b { display: inline-flex; align-items: center; justify-content: c=
+enter; width: 19px; height: 19px; flex: 0 0 19px; border-radius: 50%; font-=
+size: 11px; margin-top: 1px; }
+
+.criteria .ok { background: rgb(227, 246, 236); color: rgb(15, 122, 77); }
+
+.criteria .no { background: rgb(253, 234, 236); color: rgb(180, 35, 24); }
+
+.placeholder { padding: 22px 20px; color: var(--muted); font-size: 13px; }
+
+.dummy-flag { margin-bottom: 18px; padding: 12px 16px; background: rgb(255,=
+ 248, 234); border: 1px solid rgb(243, 221, 176); border-radius: 12px; colo=
+r: rgb(107, 74, 16); font-size: 12px; }
+
+@media (max-width: 760px) {
+  .detail-grid { grid-template-columns: repeat(2, minmax(0px, 1fr)); }
+  .detail-cell:nth-child(3) { border-left: 0px; }
+  .detail-cell:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+------MultipartBoundary--ohztfPnx69ujCgf8F3B3TCPyCSnMeXPKup6pXNX6fL------
