@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!-- saved from url=(0157)file:///Users/waldo/Library/Application%20Support/Claude-3p/local-agent-mode-sessions/b40540bb/00000000/d58dc65b/outputs/product-readiness-section-dummy.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product readiness — section template (dummy data)</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink:#101828; --muted:#667085; --line:#e7e9f0; --soft:#f6f7fb; --paper:#fff;
+      --blue:#3457f1; --blue-2:#6c7cff; --green:#16a36a; --amber:#e9a23b; --red:#d94b5c;
+      --shadow:0 12px 32px rgba(30,35,90,.08); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;padding:40px 0;color:var(--ink);background:var(--soft);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.45}
+    .wrap{width:min(1180px,calc(100% - 40px));margin:0 auto}
+    .card{background:var(--paper);border:1px solid rgba(231,233,240,.9);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .section + .section{margin-top:34px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}
+    .section-head h2{margin:0;font-size:22px;letter-spacing:-.02em}
+    .section-head p{margin:4px 0 0;color:var(--muted)}
+    .matrix-card{overflow:hidden}
+    .table-scroll{overflow-x:auto}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:13px 16px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle;white-space:nowrap}
+    th{color:var(--muted);background:#fbfbfd;font-size:10px;letter-spacing:.05em;text-transform:uppercase}
+    td:first-child,th:first-child{text-align:left;font-weight:800}
+    tr:last-child td{border-bottom:0}
+    .dot{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;
+      border:0;cursor:pointer;font:inherit;font-size:14px;font-weight:800;transition:transform .12s, box-shadow .12s}
+    .dot:hover{transform:scale(1.08)}
+    .dot:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+    .dot.green{background:#e3f6ec;color:#0f7a4d}
+    .dot.amber{background:#fdf2e3;color:#a4600f}
+    .dot.red{background:#fdeaec;color:#b42318}
+    .dot.none{background:#f4f5f8;color:#98a2b3}
+    .dot.is-selected{box-shadow:0 0 0 3px rgba(52,87,241,.35)}
+    .legend{display:flex;flex-wrap:wrap;gap:18px 26px;padding:15px 18px;border-top:1px solid var(--line);
+      background:#fafaff;font-size:12px;color:#475467}
+    .legend span.k{display:inline-flex;align-items:center;gap:7px}
+    .legend .dot{width:22px;height:22px;font-size:11px;cursor:default}
+    .legend .dot:hover{transform:none}
+    /* ---- detail panel ---- */
+    .detail{margin-top:16px;padding:0;overflow:hidden}
+    .detail-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;border-bottom:1px solid var(--line);background:#fbfbfd}
+    .detail-title{font-size:16px;font-weight:800}
+    .detail-close{border:1px solid #d7dae5;background:#fff;border-radius:9px;padding:6px 10px;cursor:pointer;font:inherit;font-size:12px;color:#475467}
+    .detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+    .detail-cell{padding:16px 20px}
+    .detail-cell + .detail-cell{border-left:1px solid var(--line)}
+    .detail-label{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+    .detail-value{margin-top:5px;font-size:26px;font-weight:800;letter-spacing:-.03em}
+    .detail-sub{margin-top:4px;color:var(--muted);font-size:11px}
+    .criteria{list-style:none;margin:0;padding:14px 20px 18px;border-top:1px solid var(--line);font-size:13px}
+    .criteria li{display:flex;gap:9px;align-items:flex-start;padding:5px 0}
+    .criteria b{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;flex:0 0 19px;
+      border-radius:50%;font-size:11px;margin-top:1px}
+    .criteria .ok{background:#e3f6ec;color:#0f7a4d}
+    .criteria .no{background:#fdeaec;color:#b42318}
+    .placeholder{padding:22px 20px;color:var(--muted);font-size:13px}
+    .dummy-flag{margin-bottom:18px;padding:12px 16px;background:#fff8ea;border:1px solid #f3ddb0;border-radius:12px;color:#6b4a10;font-size:12px}
+    @media (max-width:760px){
+      .detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .detail-cell:nth-child(3){border-left:0}
+      .detail-cell:nth-child(n+3){border-top:1px solid var(--line)}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="dummy-flag"><strong>Template with dummy data.</strong> Client counts, transaction volumes and issue counts per cell are invented — only the layout, the rules and the click-through behaviour are real.</div>
+
+  <section class="section" id="readinessByMode"><div class="section-head"><div><h2>Product readiness by operation mode</h2><p>Readiness of each operation mode per country, judged on three criteria: at least one client in production with that operation mode, at least 200 transactions across those clients in the last week, and no critical issues for that country and operation mode.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Country</th><th>Standalone</th><th>Cloud Sync</th><th>Cloud Async</th><th>App to App Sync</th></tr></thead><tbody><tr><td>Mexico</td><td><button type="button" class="dot green" data-country="Mexico" data-column="Standalone" title="Mexico · Standalone — Ready — all three criteria met" aria-label="Mexico · Standalone — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot none" data-country="Mexico" data-column="Cloud Sync" title="Mexico · Cloud Sync — No clients in integration or production" aria-label="Mexico · Cloud Sync — No clients in integration or production">–</button></td><td><button type="button" class="dot red" data-country="Mexico" data-column="Cloud Async" title="Mexico · Cloud Async — Not ready — critical issues or no criteria met" aria-label="Mexico · Cloud Async — Not ready — critical issues or no criteria met">✕</button></td><td><button type="button" class="dot red" data-country="Mexico" data-column="App to App Sync" title="Mexico · App to App Sync — Not ready — critical issues or no criteria met" aria-label="Mexico · App to App Sync — Not ready — critical issues or no criteria met">✕</button></td></tr><tr><td>Chile</td><td><button type="button" class="dot green" data-country="Chile" data-column="Standalone" title="Chile · Standalone — Ready — all three criteria met" aria-label="Chile · Standalone — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot amber" data-country="Chile" data-column="Cloud Sync" title="Chile · Cloud Sync — Partial — at least one criterion not met" aria-label="Chile · Cloud Sync — Partial — at least one criterion not met">!</button></td><td><button type="button" class="dot red" data-country="Chile" data-column="Cloud Async" title="Chile · Cloud Async — Not ready — critical issues or no criteria met" aria-label="Chile · Cloud Async — Not ready — critical issues or no criteria met">✕</button></td><td><button type="button" class="dot green" data-country="Chile" data-column="App to App Sync" title="Chile · App to App Sync — Ready — all three criteria met" aria-label="Chile · App to App Sync — Ready — all three criteria met">✓</button></td></tr><tr><td>Colombia</td><td><button type="button" class="dot green" data-country="Colombia" data-column="Standalone" title="Colombia · Standalone — Ready — all three criteria met" aria-label="Colombia · Standalone — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot amber" data-country="Colombia" data-column="Cloud Sync" title="Colombia · Cloud Sync — Partial — at least one criterion not met" aria-label="Colombia · Cloud Sync — Partial — at least one criterion not met">!</button></td><td><button type="button" class="dot none" data-country="Colombia" data-column="Cloud Async" title="Colombia · Cloud Async — No clients in integration or production" aria-label="Colombia · Cloud Async — No clients in integration or production">–</button></td><td><button type="button" class="dot green" data-country="Colombia" data-column="App to App Sync" title="Colombia · App to App Sync — Ready — all three criteria met" aria-label="Colombia · App to App Sync — Ready — all three criteria met">✓</button></td></tr><tr><td>Peru</td><td><button type="button" class="dot green" data-country="Peru" data-column="Standalone" title="Peru · Standalone — Ready — all three criteria met" aria-label="Peru · Standalone — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot none" data-country="Peru" data-column="Cloud Sync" title="Peru · Cloud Sync — No clients in integration or production" aria-label="Peru · Cloud Sync — No clients in integration or production">–</button></td><td><button type="button" class="dot none" data-country="Peru" data-column="Cloud Async" title="Peru · Cloud Async — No clients in integration or production" aria-label="Peru · Cloud Async — No clients in integration or production">–</button></td><td><button type="button" class="dot none" data-country="Peru" data-column="App to App Sync" title="Peru · App to App Sync — No clients in integration or production" aria-label="Peru · App to App Sync — No clients in integration or production">–</button></td></tr></tbody></table></div><div class="legend"><span class="k"><span class="dot green">✓</span>Ready — all three criteria met</span><span class="k"><span class="dot amber">!</span>Partial — at least one criterion not met</span><span class="k"><span class="dot red">✕</span>Not ready — critical issues or no criteria met</span><span class="k"><span class="dot none">–</span>No clients in integration or production</span></div></article><article class="card detail" id="readinessByModeDetail"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article></section>
+  <section class="section" id="readinessByService"><div class="section-head"><div><h2>Product readiness by service</h2><p>Readiness of each service per country, judged on three criteria: at least one client in production with that service, at least 200 transactions across those clients in the last week, and no critical issues for that country and service.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Country</th><th>Charge</th><th>Preauth &amp; Capture</th><th>Void</th><th>Other Integration Services</th></tr></thead><tbody><tr><td>Mexico</td><td><button type="button" class="dot red" data-country="Mexico" data-column="Charge" title="Mexico · Charge — Not ready — critical issues or no criteria met" aria-label="Mexico · Charge — Not ready — critical issues or no criteria met">✕</button></td><td><button type="button" class="dot red" data-country="Mexico" data-column="Preauth &amp; Capture" title="Mexico · Preauth &amp; Capture — Not ready — critical issues or no criteria met" aria-label="Mexico · Preauth &amp; Capture — Not ready — critical issues or no criteria met">✕</button></td><td><button type="button" class="dot green" data-country="Mexico" data-column="Void" title="Mexico · Void — Ready — all three criteria met" aria-label="Mexico · Void — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot amber" data-country="Mexico" data-column="Other Integration Services" title="Mexico · Other Integration Services — Partial — at least one criterion not met" aria-label="Mexico · Other Integration Services — Partial — at least one criterion not met">!</button></td></tr><tr><td>Chile</td><td><button type="button" class="dot green" data-country="Chile" data-column="Charge" title="Chile · Charge — Ready — all three criteria met" aria-label="Chile · Charge — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot none" data-country="Chile" data-column="Preauth &amp; Capture" title="Chile · Preauth &amp; Capture — No clients in integration or production" aria-label="Chile · Preauth &amp; Capture — No clients in integration or production">–</button></td><td><button type="button" class="dot green" data-country="Chile" data-column="Void" title="Chile · Void — Ready — all three criteria met" aria-label="Chile · Void — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot green" data-country="Chile" data-column="Other Integration Services" title="Chile · Other Integration Services — Ready — all three criteria met" aria-label="Chile · Other Integration Services — Ready — all three criteria met">✓</button></td></tr><tr><td>Colombia</td><td><button type="button" class="dot green" data-country="Colombia" data-column="Charge" title="Colombia · Charge — Ready — all three criteria met" aria-label="Colombia · Charge — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot red" data-country="Colombia" data-column="Preauth &amp; Capture" title="Colombia · Preauth &amp; Capture — Not ready — critical issues or no criteria met" aria-label="Colombia · Preauth &amp; Capture — Not ready — critical issues or no criteria met">✕</button></td><td><button type="button" class="dot green" data-country="Colombia" data-column="Void" title="Colombia · Void — Ready — all three criteria met" aria-label="Colombia · Void — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot amber" data-country="Colombia" data-column="Other Integration Services" title="Colombia · Other Integration Services — Partial — at least one criterion not met" aria-label="Colombia · Other Integration Services — Partial — at least one criterion not met">!</button></td></tr><tr><td>Peru</td><td><button type="button" class="dot green" data-country="Peru" data-column="Charge" title="Peru · Charge — Ready — all three criteria met" aria-label="Peru · Charge — Ready — all three criteria met">✓</button></td><td><button type="button" class="dot none" data-country="Peru" data-column="Preauth &amp; Capture" title="Peru · Preauth &amp; Capture — No clients in integration or production" aria-label="Peru · Preauth &amp; Capture — No clients in integration or production">–</button></td><td><button type="button" class="dot amber" data-country="Peru" data-column="Void" title="Peru · Void — Partial — at least one criterion not met" aria-label="Peru · Void — Partial — at least one criterion not met">!</button></td><td><button type="button" class="dot none" data-country="Peru" data-column="Other Integration Services" title="Peru · Other Integration Services — No clients in integration or production" aria-label="Peru · Other Integration Services — No clients in integration or production">–</button></td></tr></tbody></table></div><div class="legend"><span class="k"><span class="dot green">✓</span>Ready — all three criteria met</span><span class="k"><span class="dot amber">!</span>Partial — at least one criterion not met</span><span class="k"><span class="dot red">✕</span>Not ready — critical issues or no criteria met</span><span class="k"><span class="dot none">–</span>No clients in integration or production</span></div></article><article class="card detail" id="readinessByServiceDetail"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article></section>
+</div>
+
+<script>
+/* =====================================================================
+   PRODUCT READINESS — two matrices, same rules and behaviour:
+     1. by operation mode  (App to App Async excluded on purpose)
+     2. by service         (Charge, Preauth & Capture, Void, Other Integration Services)
+
+   Cell rules, per country × column:
+     C1  at least one client in production with that mode / service
+     C2  clients combined ran >= 200 transactions in the last 7 days
+     C3  no critical issues for that country and that mode / service
+   green  = all three criteria met
+   amber  = at least one criterion not met
+   red    = no criterion met, or there are critical issues
+   grey – = no clients at all in integration or production
+   ===================================================================== */
+const COUNTRIES = ["Mexico", "Chile", "Colombia", "Peru"];
+const MODES = ["Standalone", "Cloud Sync", "Cloud Async", "App to App Sync"];
+const SERVICES = ["Charge", "Preauth & Capture", "Void", "Other Integration Services"];
+const TX_THRESHOLD = 200;
+
+/* DUMMY DATA — replace with real figures.
+   key: "Country|Column" → { prod, integrating, pipeline, tx, issues } */
+const MODE_DATA = {
+  "Mexico|Standalone":        { prod: 6, integrating: 2, pipeline: 3, tx: 1840, issues: 0 },
+  "Mexico|Cloud Sync":        { prod: 0, integrating: 0, pipeline: 2, tx: 0,    issues: 0 },
+  "Mexico|Cloud Async":       { prod: 0, integrating: 1, pipeline: 0, tx: 45,   issues: 1 },
+  "Mexico|App to App Sync":   { prod: 1, integrating: 3, pipeline: 2, tx: 260,  issues: 1 },
+
+  "Chile|Standalone":         { prod: 6, integrating: 0, pipeline: 2, tx: 2310, issues: 0 },
+  "Chile|Cloud Sync":         { prod: 0, integrating: 2, pipeline: 0, tx: 120,  issues: 0 },
+  "Chile|Cloud Async":        { prod: 0, integrating: 1, pipeline: 0, tx: 30,   issues: 2 },
+  "Chile|App to App Sync":    { prod: 3, integrating: 1, pipeline: 4, tx: 4120, issues: 0 },
+
+  "Colombia|Standalone":      { prod: 11, integrating: 0, pipeline: 1, tx: 1560, issues: 0 },
+  "Colombia|Cloud Sync":      { prod: 0,  integrating: 1, pipeline: 0, tx: 90,   issues: 0 },
+  "Colombia|Cloud Async":     { prod: 0,  integrating: 0, pipeline: 0, tx: 0,    issues: 0 },
+  "Colombia|App to App Sync": { prod: 1,  integrating: 2, pipeline: 1, tx: 210,  issues: 0 },
+
+  "Peru|Standalone":          { prod: 5, integrating: 0, pipeline: 2, tx: 640, issues: 0 },
+  "Peru|Cloud Sync":          { prod: 0, integrating: 0, pipeline: 2, tx: 0,   issues: 0 },
+  "Peru|Cloud Async":         { prod: 0, integrating: 0, pipeline: 0, tx: 0,   issues: 0 },
+  "Peru|App to App Sync":     { prod: 0, integrating: 0, pipeline: 1, tx: 0,   issues: 0 }
+};
+
+const SERVICE_DATA = {
+  "Mexico|Charge":                        { prod: 7, integrating: 4, pipeline: 3, tx: 2100, issues: 1 },
+  "Mexico|Preauth & Capture":             { prod: 0, integrating: 2, pipeline: 3, tx: 80,   issues: 1 },
+  "Mexico|Void":                          { prod: 7, integrating: 3, pipeline: 3, tx: 410,  issues: 0 },
+  "Mexico|Other Integration Services":    { prod: 1, integrating: 3, pipeline: 3, tx: 150,  issues: 0 },
+
+  "Chile|Charge":                         { prod: 9, integrating: 4, pipeline: 4, tx: 6480, issues: 0 },
+  "Chile|Preauth & Capture":              { prod: 0, integrating: 0, pipeline: 2, tx: 0,    issues: 1 },
+  "Chile|Void":                           { prod: 8, integrating: 4, pipeline: 4, tx: 980,  issues: 0 },
+  "Chile|Other Integration Services":     { prod: 2, integrating: 3, pipeline: 4, tx: 320,  issues: 0 },
+
+  "Colombia|Charge":                      { prod: 11, integrating: 3, pipeline: 1, tx: 1720, issues: 0 },
+  "Colombia|Preauth & Capture":           { prod: 0,  integrating: 1, pipeline: 1, tx: 40,   issues: 1 },
+  "Colombia|Void":                        { prod: 11, integrating: 3, pipeline: 1, tx: 260,  issues: 0 },
+  "Colombia|Other Integration Services":  { prod: 0,  integrating: 2, pipeline: 1, tx: 110,  issues: 0 },
+
+  "Peru|Charge":                          { prod: 5, integrating: 0, pipeline: 2, tx: 720, issues: 0 },
+  "Peru|Preauth & Capture":               { prod: 0, integrating: 0, pipeline: 2, tx: 0,   issues: 0 },
+  "Peru|Void":                            { prod: 5, integrating: 0, pipeline: 2, tx: 190, issues: 0 },
+  "Peru|Other Integration Services":      { prod: 0, integrating: 0, pipeline: 2, tx: 0,   issues: 0 }
+};
+
+const EMPTY = { prod: 0, integrating: 0, pipeline: 0, tx: 0, issues: 0 };
+const esc = v => String(v ?? "").replace(/[&<>'"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;" }[c]));
+const nf = n => n.toLocaleString("en-US");
+
+const ICON = { green: "✓", amber: "!", red: "✕", none: "–" };
+const STATE_LABEL = {
+  green: "Ready — all three criteria met",
+  amber: "Partial — at least one criterion not met",
+  red: "Not ready — critical issues or no criteria met",
+  none: "No clients in integration or production"
+};
+
+function evaluate(data, country, column) {
+  const d = data[country + "|" + column] || EMPTY;
+  const active = d.prod + d.integrating;
+  if (!active) return { state: "none", d, active, c1: false, c2: false, c3: d.issues === 0 };
+  const c1 = d.prod >= 1, c2 = d.tx >= TX_THRESHOLD, c3 = d.issues === 0;
+  const met = [c1, c2, c3].filter(Boolean).length;
+  const state = d.issues > 0 ? "red" : met === 3 ? "green" : met === 0 ? "red" : "amber";
+  return { state, d, active, c1, c2, c3 };
+}
+
+/* One matrix + its own detail panel. `cfg` = { root, title, unit, columns, data } */
+function renderMatrix(cfg) {
+  const panelId = cfg.root + "Detail";
+  const rows = COUNTRIES.map(country => {
+    const cells = cfg.columns.map(column => {
+      const r = evaluate(cfg.data, country, column);
+      const label = country + " · " + column + " — " + STATE_LABEL[r.state];
+      return "<td>" + '<button type="button" class="dot ' + r.state + '" data-country="' + esc(country) +
+        '" data-column="' + esc(column) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '">' +
+        ICON[r.state] + "</button></td>";
+    }).join("");
+    return "<tr><td>" + esc(country) + "</td>" + cells + "</tr>";
+  }).join("");
+
+  document.getElementById(cfg.root).innerHTML =
+    '<div class="section-head"><div><h2>' + esc(cfg.title) + "</h2>" +
+    "<p>Readiness of each " + cfg.unit + " per country, judged on three criteria: at least one client in production with that " +
+    cfg.unit + ", at least " + TX_THRESHOLD + " transactions across those clients in the last week, and no critical issues for that country and " +
+    cfg.unit + ".</p></div></div>" +
+    '<article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Country</th>' +
+    cfg.columns.map(c => "<th>" + esc(c) + "</th>").join("") + "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
+    '<div class="legend">' +
+    ["green","amber","red","none"].map(s => '<span class="k"><span class="dot ' + s + '">' + ICON[s] + "</span>" + esc(STATE_LABEL[s]) + "</span>").join("") +
+    "</div></article>" +
+    '<article class="card detail" id="' + panelId + '"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article>';
+
+  const clear = () => document.getElementById(panelId).innerHTML =
+    '<div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div>';
+
+  document.querySelectorAll("#" + cfg.root + " button.dot").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll("#" + cfg.root + " button.dot").forEach(b => b.classList.remove("is-selected"));
+    btn.classList.add("is-selected");
+    renderDetail(cfg, panelId, btn.dataset.country, btn.dataset.column, clear);
+  }));
+}
+
+function renderDetail(cfg, panelId, country, column, clear) {
+  const r = evaluate(cfg.data, country, column), d = r.d;
+  const tick = (ok, text) => "<li><b class=" + (ok ? '"ok">✓' : '"no">✕') + "</b><span>" + text + "</span></li>";
+  document.getElementById(panelId).innerHTML =
+    '<div class="detail-head"><div class="detail-title">' + esc(country) + " · " + esc(column) + "</div>" +
+    '<div style="display:flex;align-items:center;gap:12px"><span class="dot ' + r.state + '" style="cursor:default">' + ICON[r.state] + "</span>" +
+    '<button type="button" class="detail-close">Close</button></div></div>' +
+    '<div class="detail-grid">' +
+    '<div class="detail-cell"><div class="detail-label">Clients in production + integration</div><div class="detail-value">' + r.active +
+    '</div><div class="detail-sub">' + d.prod + " in production · " + d.integrating + " integrating</div></div>" +
+    '<div class="detail-cell"><div class="detail-label">Clients in pipeline</div><div class="detail-value">' + d.pipeline +
+    '</div><div class="detail-sub">Not counted for readiness</div></div>' +
+    '<div class="detail-cell"><div class="detail-label">Transactions last week</div><div class="detail-value">' + nf(d.tx) +
+    '</div><div class="detail-sub">Threshold ' + nf(TX_THRESHOLD) + "</div></div>" +
+    '<div class="detail-cell"><div class="detail-label">Critical issues</div><div class="detail-value">' + d.issues +
+    '</div><div class="detail-sub">' + (d.issues ? "Forces the red state" : "None open") + "</div></div></div>" +
+    '<ul class="criteria">' +
+    tick(r.c1, "At least one client in production with this " + cfg.unit + " — " + d.prod + " in production") +
+    tick(r.c2, "At least " + nf(TX_THRESHOLD) + " transactions last week — " + nf(d.tx) + " recorded") +
+    tick(r.c3, "No critical issues for this country and " + cfg.unit + " — " + d.issues + " open") +
+    "</ul>";
+  document.querySelector("#" + panelId + " .detail-close").addEventListener("click", () => {
+    document.querySelectorAll("#" + cfg.root + " button.dot").forEach(b => b.classList.remove("is-selected"));
+    clear();
+  });
+}
+
+renderMatrix({ root: "readinessByMode", title: "Product readiness by operation mode", unit: "operation mode", columns: MODES, data: MODE_DATA });
+renderMatrix({ root: "readinessByService", title: "Product readiness by service", unit: "service", columns: SERVICES, data: SERVICE_DATA });
+</script>
+
+</body></html>
