@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<!-- saved from url=(0146)file:///Users/waldo/Library/Application%20Support/Claude-3p/local-agent-mode-sessions/b40540bb/00000000/d58dc65b/outputs/kushki-one-report-en.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kushki ONE | Regional status — coverage, releases and issues</title>
+  <!-- Terminology: always "clients" (never "merchants"). -->
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #101828; --muted: #667085; --line: #e7e9f0; --soft: #f6f7fb; --paper: #ffffff;
+      --blue: #3457f1; --blue-2: #6c7cff; --purple: #6d3df5; --cyan: #1aa7ec;
+      --green: #16a36a; --amber: #e9a23b; --red: #d94b5c;
+      --shadow: 0 12px 32px rgba(30, 35, 90, .08); --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--soft);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px; line-height: 1.45; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    /* Slim meta line replacing the old blue header block */
+    .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+      color: var(--muted); font-size: 12px; }
+    .meta-row .brand-plain { color: var(--ink); font-weight: 800; letter-spacing: .04em; }
+    .meta-row a { color: var(--blue); }
+    main { margin-top: 34px; padding-bottom: 64px; }
+    .section { margin-top: 28px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .section-head h2 { margin: 0; font-size: 22px; letter-spacing: -.02em; }
+    .section-head p { margin: 4px 0 0; color: var(--muted); }
+    .summary-head { padding-top: 10px; margin-bottom: 20px; }
+    /* ---- product readiness matrices ---- */
+    .dot { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%;
+      border:0; cursor:pointer; font:inherit; font-size:14px; font-weight:800; transition:transform .12s, box-shadow .12s; }
+    .dot:hover { transform: scale(1.08); }
+    .dot:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }
+    .dot.green { background:#e3f6ec; color:#0f7a4d; }
+    .dot.amber { background:#fdf2e3; color:#a4600f; }
+    .dot.red { background:#fdeaec; color:#b42318; }
+    /* "none" is not a neutral state: nothing has been piloted there yet, which is a gap. */
+    .dot.none { background:#f0eaff; color:#6b31ab; box-shadow: inset 0 0 0 1px #dccdf5; }
+    .dot.is-selected { box-shadow: 0 0 0 3px rgba(52,87,241,.35); }
+    .legend { display:flex; flex-wrap:wrap; gap:18px 26px; padding:15px 18px; border-top:1px solid var(--line);
+      background:#fafaff; font-size:12px; color:#475467; }
+    .legend span.k { display:inline-flex; align-items:center; gap:7px; }
+    .legend .dot { width:22px; height:22px; font-size:11px; cursor:default; }
+    .legend .dot:hover { transform:none; }
+    .detail { margin-top:16px; overflow:hidden; }
+    .detail-head { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 20px;
+      border-bottom:1px solid var(--line); background:#fbfbfd; }
+    .detail-title { font-size:16px; font-weight:800; }
+    .detail-close { border:1px solid #d7dae5; background:#fff; border-radius:9px; padding:6px 10px; cursor:pointer;
+      font:inherit; font-size:12px; color:#475467; }
+    .detail-grid { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); }
+    .detail-cell { padding:16px 20px; }
+    .detail-cell + .detail-cell { border-left:1px solid var(--line); }
+    .detail-label { color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+    .detail-value { margin-top:5px; font-size:26px; font-weight:800; letter-spacing:-.03em; }
+    .detail-sub { margin-top:4px; color:var(--muted); font-size:11px; }
+    .issue-block { padding:14px 20px; border-top:1px solid var(--line); background:#fffaf2; font-size:12px; color:#6b4a10; }
+    .issue-block strong { color:#5a3d0a; }
+    .issue-block ul { margin:8px 0 0; padding-left:18px; }
+    .issue-block li { padding:2px 0; }
+    .criteria { list-style:none; margin:0; padding:14px 20px 18px; border-top:1px solid var(--line); font-size:13px; }
+    .criteria li { display:flex; gap:9px; align-items:flex-start; padding:5px 0; }
+    .criteria b { display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; flex:0 0 19px;
+      border-radius:50%; font-size:11px; margin-top:1px; }
+    .criteria .ok { background:#e3f6ec; color:#0f7a4d; }
+    .criteria .no { background:#fdeaec; color:#b42318; }
+    .criteria .wait { background:#fff2d6; color:#8a6d1f; }
+    .cov-table td.cell { white-space: normal; }
+    .cell-reasons { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; color: var(--muted);
+      font-size: 10.5px; line-height: 1.3; max-width: 155px; margin-left: auto; margin-right: auto; }
+    .cell-reasons .reason-head { color: #475467; font-weight: 700; }
+    .issue-block li strong { color: #4a3208; }
+    /* Hourglass marker for figures that have no source data yet */
+    .await { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:99px;
+      background:#fff8ea; border:1px solid #f3ddb0; color:#8a6d1f; font-size:11px; font-weight:700; white-space:nowrap; }
+    .await-sm { font-size:10.5px; padding:1px 6px; }
+    .placeholder { padding:22px 20px; color:var(--muted); font-size:13px; }
+    .dummy-flag { margin: 22px 0 0; padding:12px 16px; background:#fff8ea; border:1px solid #f3ddb0;
+      border-radius:12px; color:#6b4a10; font-size:12px; }
+    .card { background: var(--paper); border: 1px solid rgba(231,233,240,.9); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .narrative { padding: 22px 24px; margin-bottom: 16px; }
+    .narrative p { margin: 0 0 11px; color: #344054; }
+    .narrative p:last-child { margin-bottom: 0; }
+    .narrative strong { color: var(--ink); }
+    .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .kpi { padding: 20px; min-height: 120px; }
+    .kpi-label { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .kpi-value { margin-top: 7px; font-size: 34px; line-height: 1; font-weight: 800; letter-spacing: -.04em; }
+    .kpi-note { margin-top: 9px; color: var(--muted); font-size: 12px; }
+    .matrix-card { overflow: hidden; }
+    .matrix-note { padding: 14px 18px; color: var(--muted); background: #fafaff; border-bottom: 1px solid var(--line); font-size: 12px; border-radius: 12px; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; white-space: nowrap; }
+    th { color: var(--muted); background: #fbfbfd; font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    .integration-tag, .tag { display: inline-flex; align-items: center; min-height: 25px; padding: 4px 9px; border-radius: 99px; font-size: 11px; font-weight: 700; }
+    .integration-tag { color: #3745a4; background: #eef0ff; }
+    .issues-card { overflow: hidden; }
+    .issue-title { min-width: 260px; white-space: normal; font-weight: 750; }
+    .issue-id { color: var(--muted); font-size: 11px; font-weight: 700; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; max-width: 250px; white-space: normal; }
+    .tag { color: #344054; background: #f0f2f7; }
+    .tag.country { color: #17496f; background: #e8f5fc; }
+    .tag.service { color: #57411a; background: #fff3d8; }
+    .tag.dms { color: #5c2581; background: #f4e9ff; }
+    .tag.crit-urgent { color: #a2231d; background: #fdeaec; }
+    .tag.crit-high { color: #8a4b0f; background: #fdf2e3; }
+    .tag.tbd { color: #8a6d1f; background: #fff8ea; }
+    .empty { padding: 48px 24px; text-align: center; color: var(--muted); }
+    .empty strong { display: block; margin-bottom: 6px; color: var(--ink); font-size: 16px; }
+    details { margin-top: 18px; }
+    details summary { cursor: pointer; color: var(--blue); font-weight: 750; }
+    .guide { margin-top: 10px; padding: 18px 22px; color: #475467; background: #eef1ff; border: 1px solid #dce1ff; border-radius: 14px; font-size: 12px; line-height: 1.55; }
+    .guide p { margin: 0 0 12px; }
+    .guide p:last-child { margin-bottom: 0; }
+    .guide strong { color: var(--ink); }
+    .guide code { background: #fff; border: 1px solid #dce1ff; border-radius: 5px; padding: 1px 5px; font-size: 11px; }
+    footer { padding: 20px 0 38px; color: var(--muted); text-align: center; font-size: 11px; }
+    .status-table td:first-child, .status-table th:first-child { font-weight: 800; }
+    .status-table .num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 750; }
+    .status-table th:nth-child(n+3):nth-child(-n+8) { text-align: right; }
+    .status-table td.seg { color: #475467; font-size: 12px; font-weight: 700; }
+    .status-table tr.seg-second td { border-bottom: 2px solid #dfe3ee; }
+    .status-table td[rowspan] { vertical-align: middle; }
+    .status-table .tags { max-width: 230px; }
+    .status-table .cov-total td { font-weight: 800; }
+    .cov-table td, .cov-table th { text-align: center; }
+    .cov-table td:first-child, .cov-table th:first-child { text-align: left; font-weight: 800; }
+    .cov-total td { background: #fbfbfd; }
+    .bar-mini { height: 7px; border-radius: 99px; background: #eceef6; overflow: hidden; margin-top: 8px; }
+    .bar-mini > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--blue-2)); }
+    @media (max-width: 900px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 24px, 1180px); }
+      .kpis { grid-template-columns: 1fr; }
+    }
+    @media print {
+      @page { size: A4 landscape; margin: 10mm; }
+      body { background: #fff; font-size: 10.5px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .card { box-shadow: none; break-inside: avoid; }
+      main { margin-top: 18px; padding-bottom: 12px; }
+      .section { break-inside: avoid; }
+      .detail-close { display: none; }
+      details > summary { display: none; }
+      details > *:not(summary) { display: block !important; }
+      .guide { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="meta-row">
+      <span class="brand-plain">KUSHKI ONE · Regional status</span>
+      <span>Source: <a href="https://docs.google.com/spreadsheets/d/1qHi_HphqZV8yhYy0Gza1FZMRX9xx9N9qTex1pCbSb0o/edit" target="_blank" rel="noopener noreferrer">Spreadsheet link</a></span>
+    </div>
+    <div class="section-head summary-head"><h2>Summary</h2></div>
+
+    <article class="card narrative">
+      <p><strong>Where we stand.</strong> 31 clients in production, of which 28 are Standalone and only 3 run on an integrated mode — and those three are all in Chile. In production by country: Colombia 11, Chile 9, Mexico 6, Peru 5, plus one churned client in Peru. Another 10 clients are integrating, and there the balance flips: 8 of them are integrated and 2 Standalone, so the integrated side of the product is still ahead of us rather than behind us.</p>
+      <p><strong>Blockers.</strong> Three critical issues are open — critical meaning immediate or urgent — and all three are already fixed and shipping on 15/09/2026: one sits on DMS, which every operation mode depends on, and the other two reach every service, which is what keeps the readiness matrices red. Ten more high issues are reported for information without affecting approval: three ship on 15/09/2026, three on 25/09/2026 and four have no release date yet.</p>
+      <p><strong>Releases.</strong> 37 tickets across the last four releases, 30 approved on first review (81%), 6 calendar days on average to production. Quality and speed are improving: 74% approved and 17 days to production on 21/08, versus 90% and 4 days on 03/09; hotfixes shipped in 1–2 days.</p>
+      <p><strong>Pipeline.</strong> Nine projected clients: Chile 5, Peru 4, Mexico 3, Colombia 1 — mostly Standalone and App to App Sync. Cloud Async has no pipeline anywhere, and Peru has no projected client on App to App Sync beyond Standalone-first partners.</p>
+    </article>
+
+    <section class="section" id="countryStatus"><div class="section-head"><div><h2>Country status</h2><p>Clients, weekly volume and what is actually live in each country, split between Standalone clients and integrated clients (any operation mode other than Standalone). Operation modes and services are listed only when at least one client in production uses them.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table class="status-table"><thead><tr><th>Country</th><th>Segment</th><th>Clients in production</th><th>In integration</th><th>Pipeline</th><th>Transactions last week</th><th>TPV last week</th><th>Approval rate</th><th>Operation modes live</th><th>Services live</th></tr></thead><tbody><tr class=""><td rowspan="2">Mexico</td><td class="seg">Standalone</td><td class="num">6</td><td class="num">2</td><td class="num">3</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td rowspan="2"><div class="tags"><span class="integration-tag">Standalone</span></div></td><td rowspan="2"><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span></div></td></tr><tr class=" seg-second"><td class="seg">Integrated</td><td class="num">0</td><td class="num">3</td><td class="num">3</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td></tr><tr class=""><td rowspan="2">Chile</td><td class="seg">Standalone</td><td class="num">6</td><td class="num">0</td><td class="num">3</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td rowspan="2"><div class="tags"><span class="integration-tag">Standalone</span><span class="integration-tag">App to App Sync</span></div></td><td rowspan="2"><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span><span class="integration-tag">Other Services</span></div></td></tr><tr class=" seg-second"><td class="seg">Integrated</td><td class="num">3</td><td class="num">4</td><td class="num">5</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td></tr><tr class=""><td rowspan="2">Colombia</td><td class="seg">Standalone</td><td class="num">11</td><td class="num">0</td><td class="num">1</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td rowspan="2"><div class="tags"><span class="integration-tag">Standalone</span></div></td><td rowspan="2"><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span></div></td></tr><tr class=" seg-second"><td class="seg">Integrated</td><td class="num">0</td><td class="num">3</td><td class="num">1</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td></tr><tr class=""><td rowspan="2">Peru</td><td class="seg">Standalone</td><td class="num">5</td><td class="num">0</td><td class="num">2</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td rowspan="2"><div class="tags"><span class="integration-tag">Standalone</span></div></td><td rowspan="2"><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span></div></td></tr><tr class=" seg-second"><td class="seg">Integrated</td><td class="num">0</td><td class="num">0</td><td class="num">4</td><td class="num"><span style="color:var(--muted)">–</span></td><td class="num"><span style="color:var(--muted)">–</span></td><td class="num"><span style="color:var(--muted)">–</span></td></tr><tr class="cov-total"><td rowspan="2">Regional</td><td class="seg">Standalone</td><td class="num">28</td><td class="num">2</td><td class="num">5</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td rowspan="2"><div class="tags"><span class="integration-tag">Standalone</span><span class="integration-tag">App to App Sync</span></div></td><td rowspan="2"><div class="tags"><span class="integration-tag">Charge</span><span class="integration-tag">Refunds</span><span class="integration-tag">Other Services</span></div></td></tr><tr class="cov-total seg-second"><td class="seg">Integrated</td><td class="num">3</td><td class="num">8</td><td class="num">9</td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td><td class="num"><span class="await await-sm">⏳ Awaiting data</span></td></tr></tbody></table></div><div class="matrix-note" style="border-radius:0;border-top:1px solid var(--line);border-bottom:0">Standalone covers clients using the Standalone mode; Integrated covers clients using Cloud Sync, Cloud Async, App to App Sync or App to App Async. A client using both is counted in both segments, so the two rows can add up to more than the country total. Client figures are unique client names per country; in the regional rows a client present in several countries counts once, and the modes and services listed are the union of everything live in any country. ⏳ Transactions, TPV and approval rate have no source loaded yet; a dash means the segment has no clients in production or integration, so there is nothing to measure. Modes and services live require at least one client in production, not just integrating.</div></article></section>
+
+    <div class="dummy-flag"><strong>⏳ Awaiting data — transaction volume.</strong> Weekly transactions, TPV and approval rate are not loaded in the spreadsheet yet, so they are shown as “Awaiting data”. For the readiness criteria we <strong>assume the transaction volume is sufficient</strong>, so that criterion is marked as met. Everything else — clients, pipeline, releases and issues — comes from the spreadsheet.</div>
+
+    <section class="section" id="readinessByMode"><div class="section-head"><div><h2>Product readiness by operation mode</h2><p>Readiness of each operation mode per country, judged on three criteria: at least one client in production with that operation mode, at least 200 transactions across those clients in the last week, and no critical issue open for that country and operation mode. Critical means immediate or urgent; high issues are reported in the issues section but do not block a cell.</p></div></div><article class="card matrix-card"><div class="matrix-note" style="border-radius:0;border-bottom:1px solid var(--line)">⏳ There is no weekly transaction data yet, so the transaction criterion is <strong>assumed met</strong> in every cell. One critical issue sits on DMS (K1-286), which every operation mode depends on, so it applies to all modes.</div><div class="table-scroll"><table class="cov-table"><thead><tr><th>Country</th><th>Standalone</th><th>Cloud Sync</th><th>Cloud Async</th><th>App to App Sync</th></tr></thead><tbody><tr><td>Mexico</td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="Standalone" title="Mexico · Standalone — Not ready — critical issues, or no criteria met" aria-label="Mexico · Standalone — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Mexico" data-column="Cloud Sync" title="Mexico · Cloud Sync — Not started — no clients in integration or production" aria-label="Mexico · Cloud Sync — Not started — no clients in integration or production">⊘</button></td><td class="cell"><button type="button" class="dot none" data-country="Mexico" data-column="Cloud Async" title="Mexico · Cloud Async — Not started — no clients in integration or production" aria-label="Mexico · Cloud Async — Not started — no clients in integration or production">⊘</button></td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="App to App Sync" title="Mexico · App to App Sync — Not ready — critical issues, or no criteria met" aria-label="Mexico · App to App Sync — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td></tr><tr><td>Chile</td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="Standalone" title="Chile · Standalone — Not ready — critical issues, or no criteria met" aria-label="Chile · Standalone — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="Cloud Sync" title="Chile · Cloud Sync — Not ready — critical issues, or no criteria met" aria-label="Chile · Cloud Sync — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="Cloud Async" title="Chile · Cloud Async — Not ready — critical issues, or no criteria met" aria-label="Chile · Cloud Async — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="App to App Sync" title="Chile · App to App Sync — Not ready — critical issues, or no criteria met" aria-label="Chile · App to App Sync — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span></div></td></tr><tr><td>Colombia</td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="Standalone" title="Colombia · Standalone — Not ready — critical issues, or no criteria met" aria-label="Colombia · Standalone — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="Cloud Sync" title="Colombia · Cloud Sync — Not ready — critical issues, or no criteria met" aria-label="Colombia · Cloud Sync — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Colombia" data-column="Cloud Async" title="Colombia · Cloud Async — Not started — no clients in integration or production" aria-label="Colombia · Cloud Async — Not started — no clients in integration or production">⊘</button></td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="App to App Sync" title="Colombia · App to App Sync — Not ready — critical issues, or no criteria met" aria-label="Colombia · App to App Sync — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td></tr><tr><td>Peru</td><td class="cell"><button type="button" class="dot red" data-country="Peru" data-column="Standalone" title="Peru · Standalone — Not ready — critical issues, or no criteria met" aria-label="Peru · Standalone — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Cloud Sync" title="Peru · Cloud Sync — Not started — no clients in integration or production" aria-label="Peru · Cloud Sync — Not started — no clients in integration or production">⊘</button></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Cloud Async" title="Peru · Cloud Async — Not started — no clients in integration or production" aria-label="Peru · Cloud Async — Not started — no clients in integration or production">⊘</button></td><td class="cell"><button type="button" class="dot none is-selected" data-country="Peru" data-column="App to App Sync" title="Peru · App to App Sync — Not started — no clients in integration or production" aria-label="Peru · App to App Sync — Not started — no clients in integration or production">⊘</button></td></tr></tbody></table></div><div class="legend"><span class="k"><span class="dot green">✓</span>Ready — all three criteria met</span><span class="k"><span class="dot amber">!</span>Partial — at least one criterion not met</span><span class="k"><span class="dot red">✕</span>Not ready — critical issues, or no criteria met</span><span class="k"><span class="dot none">⊘</span>Not started — no clients in integration or production</span></div></article><article class="card detail" id="readinessByModeDetail"><div class="detail-head"><div class="detail-title">Peru · App to App Sync</div><div style="display:flex;align-items:center;gap:12px"><span class="dot none" style="cursor:default">⊘</span><button type="button" class="detail-close">Close</button></div></div><div class="detail-grid"><div class="detail-cell"><div class="detail-label">Clients in production + integration</div><div class="detail-value">0</div><div class="detail-sub">0 in production · 0 integrating</div></div><div class="detail-cell"><div class="detail-label">Clients in pipeline</div><div class="detail-value">3</div><div class="detail-sub">Not counted for readiness</div></div><div class="detail-cell"><div class="detail-label">Transactions last week</div><div class="detail-value" style="font-size:15px"><span class="await">⏳ Awaiting data</span></div><div class="detail-sub">Threshold 200 · assumed met</div></div><div class="detail-cell"><div class="detail-label">Critical issues</div><div class="detail-value">2</div><div class="detail-sub">All resolved by 15/09/2026</div></div></div><div class="issue-block"><strong>2 critical issues affecting this operation mode in Peru — all resolved by 15/09/2026 (date the last ticket ships).</strong><ul><li><strong>K1-308 · Reauth does not respect the tax breakdown</strong> — Urgent, status Fixed, ships on 15/09/2026</li><li><strong>K1-286 · Application update pull from the terminal</strong> — Urgent, status Fixed, ships on 15/09/2026 (DMS, applies to all operation modes)</li></ul></div><ul class="criteria"><li><b class="no">✕</b><span>No clients in production with this operation mode — 0 integrating</span></li><li><b class="wait">⏳</b><span>Transactions assumed sufficient — no volume data loaded yet</span></li><li><b class="no">✕</b><span>2 critical issues open for this country and operation mode — all resolved by 15/09/2026</span></li></ul></article></section>
+    <section class="section" id="readinessByService"><div class="section-head"><div><h2>Product readiness by service</h2><p>Readiness of each service per country, judged on three criteria: at least one client in production with that service, at least 200 transactions across those clients in the last week, and no critical issue open for that country and service. Critical means immediate or urgent; high issues are reported in the issues section but do not block a cell.</p></div></div><article class="card matrix-card"><div class="matrix-note" style="border-radius:0;border-bottom:1px solid var(--line)">⏳ There is no weekly transaction data yet, so the transaction criterion is <strong>assumed met</strong> in every cell.</div><div class="table-scroll"><table class="cov-table"><thead><tr><th>Country</th><th>Charge</th><th>Preauth &amp; Capture</th><th>Refunds</th><th>Other Services</th></tr></thead><tbody><tr><td>Mexico</td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="Charge" title="Mexico · Charge — Not ready — critical issues, or no criteria met" aria-label="Mexico · Charge — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="Preauth &amp; Capture" title="Mexico · Preauth &amp; Capture — Not ready — critical issues, or no criteria met" aria-label="Mexico · Preauth &amp; Capture — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="Refunds" title="Mexico · Refunds — Not ready — critical issues, or no criteria met" aria-label="Mexico · Refunds — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Mexico" data-column="Other Services" title="Mexico · Other Services — Not ready — critical issues, or no criteria met" aria-label="Mexico · Other Services — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td></tr><tr><td>Chile</td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="Charge" title="Chile · Charge — Not ready — critical issues, or no criteria met" aria-label="Chile · Charge — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Chile" data-column="Preauth &amp; Capture" title="Chile · Preauth &amp; Capture — Not started — no clients in integration or production" aria-label="Chile · Preauth &amp; Capture — Not started — no clients in integration or production">⊘</button></td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="Refunds" title="Chile · Refunds — Not ready — critical issues, or no criteria met" aria-label="Chile · Refunds — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Chile" data-column="Other Services" title="Chile · Other Services — Not ready — critical issues, or no criteria met" aria-label="Chile · Other Services — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td></tr><tr><td>Colombia</td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="Charge" title="Colombia · Charge — Not ready — critical issues, or no criteria met" aria-label="Colombia · Charge — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="Preauth &amp; Capture" title="Colombia · Preauth &amp; Capture — Not ready — critical issues, or no criteria met" aria-label="Colombia · Preauth &amp; Capture — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">2 issues — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="Refunds" title="Colombia · Refunds — Not ready — critical issues, or no criteria met" aria-label="Colombia · Refunds — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot red" data-country="Colombia" data-column="Other Services" title="Colombia · Other Services — Not ready — critical issues, or no criteria met" aria-label="Colombia · Other Services — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span><span class="reason-head">No clients in production</span></div></td></tr><tr><td>Peru</td><td class="cell"><button type="button" class="dot red" data-country="Peru" data-column="Charge" title="Peru · Charge — Not ready — critical issues, or no criteria met" aria-label="Peru · Charge — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Preauth &amp; Capture" title="Peru · Preauth &amp; Capture — Not started — no clients in integration or production" aria-label="Peru · Preauth &amp; Capture — Not started — no clients in integration or production">⊘</button></td><td class="cell"><button type="button" class="dot red" data-country="Peru" data-column="Refunds" title="Peru · Refunds — Not ready — critical issues, or no criteria met" aria-label="Peru · Refunds — Not ready — critical issues, or no criteria met">✕</button><div class="cell-reasons"><span class="reason-head">1 issue — all resolved by 15/09/2026</span></div></td><td class="cell"><button type="button" class="dot none" data-country="Peru" data-column="Other Services" title="Peru · Other Services — Not started — no clients in integration or production" aria-label="Peru · Other Services — Not started — no clients in integration or production">⊘</button></td></tr></tbody></table></div><div class="legend"><span class="k"><span class="dot green">✓</span>Ready — all three criteria met</span><span class="k"><span class="dot amber">!</span>Partial — at least one criterion not met</span><span class="k"><span class="dot red">✕</span>Not ready — critical issues, or no criteria met</span><span class="k"><span class="dot none">⊘</span>Not started — no clients in integration or production</span></div></article><article class="card detail" id="readinessByServiceDetail"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article></section>
+
+    <section class="section" id="releaseSection"><div class="section-head"><div><h2>Release status</h2><p>Delivery, production shipping and first-review results.</p></div></div><article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Release type</th><th>First delivery</th><th>Shipped to production</th><th>Days to production</th><th>Status</th><th>Tickets</th><th>Approved on first review</th><th>First-pass approval</th></tr></thead><tbody><tr><td><span class="integration-tag">Release Candidate</span></td><td>21/08/2026</td><td>07/09/2026</td><td style="">17</td><td>Shipped to production</td><td>23</td><td>17</td><td>73.9%</td></tr><tr><td><span class="integration-tag">Release Candidate</span></td><td>03/09/2026</td><td>07/09/2026</td><td style="">4</td><td>Shipped to production</td><td>10</td><td>9</td><td>90.0%</td></tr><tr><td><span class="integration-tag">Hotfix</span></td><td>31/08/2026</td><td>02/09/2026</td><td style="">2</td><td>Shipped to production</td><td>3</td><td>3</td><td>100.0%</td></tr><tr><td><span class="integration-tag">Hotfix</span></td><td>07/09/2026</td><td>08/09/2026</td><td style="">1</td><td>Shipped to production</td><td>1</td><td>1</td><td>100.0%</td></tr></tbody></table></div><div class="matrix-note" style="border-radius:0">Days to production = shipping date minus first delivery date (calendar days). First-pass approval = tickets approved on the first review / total tickets. Total: 37 tickets; 30 approved on first review (81.1%). Shipping to production does not imply a per-terminal deployment status.</div></article></section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Issues detected</h2>
+          <p><strong>Critical</strong> issues — immediate or urgent — are the ones that stop a country × mode or country × service from being approved. <strong>High</strong> issues are listed for information and do not affect approval. Both are limited to issues affecting clients in production or integration, and when they come from clients already using the solution they are addressed as a hotfix right away. <span id="issueScopeNote">Critical by status: 3 fixed. High by status: 3 fixed, 5 in progress, 1 being discussed, 1 to do. 4 of the 13 still have no release date. 10 medium tickets in the tracker are out of scope for this report.</span></p>
+        </div>
+        <div id="issueCount">3 critical · 10 high</div>
+      </div>
+      <article class="card issues-card">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Issue</th><th>Criticality</th><th>Status</th><th>Release date</th><th>Country</th><th>Operation mode</th><th>Service</th></tr></thead>
+            <tbody id="issueRows"><tr><td class="issue-title"><div class="issue-id">K1-306</div>Async without transaction reference<p style="font-weight:400;font-size:12px;color:var(--muted)">Regression: transaction_reference missing on async endpoints (charge, authorization); present in v0.27.0, absent in v0.30.13</p></td><td><span class="tag crit-urgent">Urgent</span></td><td>Fixed</td><td>15/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Cloud Async</span><span class="tag">App to App Async</span></div></td><td><div class="tags"><span class="tag service">Charge</span><span class="tag service">Preauth &amp; Capture</span><span class="tag service">Refunds</span><span class="tag service">Other Services</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-308</div>Reauth does not respect the tax breakdown<p style="font-weight:400;font-size:12px;color:var(--muted)">With tax enabled in DMS only subtotal_iva0 is sent on Standalone, and with amount 0 on HTTP/Cloud</p></td><td><span class="tag crit-urgent">Urgent</span></td><td>Fixed</td><td>15/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Cloud Sync</span><span class="tag">App to App Sync</span></div></td><td><div class="tags"><span class="tag service">Preauth &amp; Capture</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-286</div>Application update pull from the terminal<p style="font-weight:400;font-size:12px;color:var(--muted)">Provides a simpler way to update applications on the terminals</p></td><td><span class="tag crit-urgent">Urgent</span></td><td>Fixed</td><td>15/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag dms">DMS</span></div></td><td><span style="color:var(--muted)">–</span></td></tr><tr><td class="issue-title"><div class="issue-id">K1-298</div>Void with Installments enabled does not return TER-004<p style="font-weight:400;font-size:12px;color:var(--muted)">With the Installments flag enabled in DMS the request hangs ~1m42s and answers MQTT_REQUEST_FAILED (Cloud and HTTP)</p></td><td><span class="tag crit-high">High</span></td><td>Fixed</td><td>15/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Cloud Sync</span><span class="tag">App to App Sync</span></div></td><td><div class="tags"><span class="tag service">Charge</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-301</div>Tip and Installments screens allow navigating to Standalone<p style="font-weight:400;font-size:12px;color:var(--muted)">With Return to Calling Application = ON the keypad is locked and the user can still navigate to Standalone</p></td><td><span class="tag crit-high">High</span></td><td>Fixed</td><td>15/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Cloud Sync</span><span class="tag">Cloud Async</span><span class="tag">App to App Sync</span><span class="tag">App to App Async</span></div></td><td><div class="tags"><span class="tag service">Charge</span><span class="tag service">Preauth &amp; Capture</span><span class="tag service">Refunds</span><span class="tag service">Other Services</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-302</div>Clicking the Kushki logo navigates to Standalone<p style="font-weight:400;font-size:12px;color:var(--muted)">After a charge through the API, the logo in the top left corner leads to Standalone</p></td><td><span class="tag crit-high">High</span></td><td>Fixed</td><td>15/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Standalone</span><span class="tag">Cloud Sync</span><span class="tag">Cloud Async</span><span class="tag">App to App Sync</span><span class="tag">App to App Async</span></div></td><td><div class="tags"><span class="tag service">Charge</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-295</div>Split payments<p style="font-weight:400;font-size:12px;color:var(--muted)">Support for split payments</p></td><td><span class="tag crit-high">High</span></td><td>In progress</td><td>25/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Standalone</span></div></td><td><div class="tags"><span class="tag service">Charge</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-296</div>LoggerSDK: improvements and optimisations<p style="font-weight:400;font-size:12px;color:var(--muted)">Improvements and optimisations of the LoggerSDK</p></td><td><span class="tag crit-high">High</span></td><td>In progress</td><td>25/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Standalone</span><span class="tag">Cloud Sync</span><span class="tag">Cloud Async</span><span class="tag">App to App Sync</span><span class="tag">App to App Async</span></div></td><td><div class="tags"><span class="tag service">Charge</span><span class="tag service">Preauth &amp; Capture</span><span class="tag service">Refunds</span><span class="tag service">Other Services</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-307</div>Async webhooks with 9 defects<p style="font-weight:400;font-size:12px;color:var(--muted)">Re-test KCR023: format, missing fields and inconsistent states (build 0.30.13)</p></td><td><span class="tag crit-high">High</span></td><td>In progress</td><td>25/09/2026</td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Cloud Async</span><span class="tag">App to App Async</span></div></td><td><div class="tags"><span class="tag service">Charge</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-138</div>Retry with a different entry mode<p style="font-weight:400;font-size:12px;color:var(--muted)">Contactless amount limit message; retrying with a different entry mode is missing</p></td><td><span class="tag crit-high">High</span></td><td>In progress</td><td><span class="tag tbd">TBD</span></td><td><div class="tags"><span class="tag country">Mexico</span></div></td><td><div class="tags"><span class="tag">Standalone</span></div></td><td><div class="tags"><span class="tag service">Charge</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-187</div>Authorization returns offline denial<p style="font-weight:400;font-size:12px;color:var(--muted)">Happens on HTTP, Cloud Sync and Cloud Async</p></td><td><span class="tag crit-high">High</span></td><td>In progress</td><td><span class="tag tbd">TBD</span></td><td><div class="tags"><span class="tag country">Mexico</span></div></td><td><div class="tags"><span class="tag">Standalone</span><span class="tag">Cloud Sync</span><span class="tag">Cloud Async</span><span class="tag">App to App Sync</span><span class="tag">App to App Async</span></div></td><td><div class="tags"><span class="tag service">Charge</span></div></td></tr><tr><td class="issue-title"><div class="issue-id">K1-263</div>Adjustment on the terminal activation screen<p style="font-weight:400;font-size:12px;color:var(--muted)">Pending adjustment on the activation screen</p></td><td><span class="tag crit-high">High</span></td><td>Being discussed</td><td><span class="tag tbd">TBD</span></td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag dms">DMS</span></div></td><td><span style="color:var(--muted)">–</span></td></tr><tr><td class="issue-title"><div class="issue-id">K1-321</div>Corrupted data crashes the application<p style="font-weight:400;font-size:12px;color:var(--muted)">K-One crashes when it finds corrupted data</p></td><td><span class="tag crit-high">High</span></td><td>To do</td><td><span class="tag tbd">TBD</span></td><td><div class="tags"><span class="tag country">Chile</span><span class="tag country">Mexico</span><span class="tag country">Peru</span><span class="tag country">Colombia</span></div></td><td><div class="tags"><span class="tag">Standalone</span><span class="tag">Cloud Sync</span><span class="tag">Cloud Async</span><span class="tag">App to App Sync</span><span class="tag">App to App Async</span></div></td><td><span style="color:var(--muted)">–</span></td></tr></tbody>
+          </table>
+        </div>
+        <div class="matrix-note" style="border-radius:0;border-top:1px solid var(--line);border-bottom:0">
+          Only <strong>critical</strong> issues (immediate or urgent) block a cell in the readiness matrices; high issues are visible here without stopping approval.
+          Status <strong>Fixed</strong> does not mean available to clients: after a fix the ticket still goes through QA and then to production, so it keeps affecting its country, mode and service until the release date. <strong>TBD</strong> means the release date is still to be defined; it ranks after every real date, so any cell holding a TBD ticket shows “Resolution date TBD”. <strong>DMS</strong> is not a column in the matrices because every operation mode depends on it, so a DMS issue is applied to all operation modes.
+        </div>
+      </article>
+    </section>
+
+    <details>
+      <summary>Reporting criteria</summary>
+      <div class="guide">
+        <p><strong>Purpose of this block.</strong> It records every rule agreed for this report so it can be rebuilt from scratch from the spreadsheet without any other context. Sections, in order: Summary (a short narrative only — the KPI cards were removed on 2026-09-11, so no metric blocks belong here) → Country status → Product readiness by operation mode → Product readiness by service → Release status → Critical issues detected → this block.</p>
+
+        <p><strong>Source.</strong> Google spreadsheet <code>1qHi_HphqZV8yhYy0Gza1FZMRX9xx9N9qTex1pCbSb0o</code>, tabs <code>Clientes</code> (gid 0), <code>Pipeline</code>, <code>Issues</code> (gid 1543440227) and releases (gid 130905531). Read them as CSV through <code>/gviz/tq?tqx=out:csv&amp;gid=…</code> (the <code>/export?format=csv</code> endpoint fails). Sheet dates are MM/DD/YYYY; this report always shows DD/MM/YYYY. The report is a single self-contained HTML file, in English, and always says “clients”, never “merchants”; all figures are rendered from the <code>REPORT_DATA</code> object, so refreshing data means editing that object only.</p>
+
+        <p><strong>Countries and columns.</strong> Countries are Mexico, Chile, Colombia and Peru (the sheet writes México and Perú). Operation modes are Standalone, Cloud Sync, Cloud Async, App to App Sync and App to App Async. The readiness matrices show only the first four: App to App Async is excluded because both apps run on the same terminal, so asynchronous calls add little value there and gaps in that mode are expected rather than a problem to solve. Services keep the four report names Charge, Preauth &amp; Capture, Refunds and Other Services, mapped from the sheet as Charge → Charge, Void → Refunds, Other Integration Services → Other Services.</p>
+
+        <p><strong>Client counting.</strong> Statuses are Producción → Production, Integración → Integration, Abandona → Churned, plus Pipeline from its own tab. Within a country each client name counts once; regional totals count unique client names, so a client present in several countries counts once regionally and the sum across countries is higher. A client with several operation modes counts once in each declared mode, so the sum across modes can exceed the client count. Churned clients are excluded from every count and only mentioned in the note of the first KPI. Pipeline clients never count towards readiness or coverage, because they have not started integrating.</p>
+
+        <p><strong>Readiness criteria (per country × operation mode and per country × service).</strong> C1: at least one client <em>in production</em> with that mode or service. C2: those clients ran at least 200 transactions in the last 7 days. C3: no critical issue open for that country and that mode or service. States: green ✓ when all three are met, amber ! when at least one is missing, red ✕ when no criterion is met or when critical issues exist (issues force red on their own), and violet ⊘ “not started” when there are no clients at all in integration or production. That last state is a gap, not a neutral value: nothing has been piloted in that combination yet, which is why it does not use a plain grey dash. Red and amber cells print every reason under the icon, one short line each, and for issues that line is only the count plus the date they are all resolved (or “resolution date TBD”). The ticket-level detail belongs to the panel that opens when the cell is clicked: clients in production and in integration, clients in pipeline, weekly transactions against the threshold, a ✓/✕ checklist of the three criteria, and the list of open issues with ID, name, criticality, status, release date and the note “(DMS, applies to all operation modes)” where it applies. Each matrix has 16 cells: 4 countries × 4 operation modes and 4 countries × 4 services. There is no aggregate coverage percentage in the report: the Summary “pilot coverage” KPIs, which counted cells meeting criteria 1 and 2 while ignoring issues, were removed with the rest of the metric cards on 2026-09-11.</p>
+
+        <p><strong>Transaction assumption in force.</strong> The columns “MIDs Asociados”, “Transacciones en los últimos 7 días”, “TPV últimos 7 días” and “% de aceptación” exist in the <code>Clientes</code> tab but are empty. Wherever a figure depends on them the report shows an ⏳ “Awaiting data” marker instead of inventing a number, and criterion C2 is <strong>assumed met</strong> so it never blocks a cell on missing data. When the columns are loaded, remove the assumption and evaluate C2 with the real figures; the aggregation rule is to sum transactions of the clients behind each cell, and a client transacting in several services cannot be split across them, so a per-service figure is needed before the service matrix reports real volume.</p>
+
+        <p><strong>Issues.</strong> <strong>Critical means Immediate or Urgent</strong> (constant <code>CRITICAL</code>): these are the only issues that fail criterion 3, and the only ones counted in the “open critical issues” KPI, whose note breaks them down by status and by release date. <strong>High</strong> issues are reported in the issues section for information and never affect approval; together with the critical ones they form the reported set (constant <code>REPORTED</code>). Medium tickets stay in the tracker and out of this report. This split was agreed on 2026-09-11 so the matrices reflect real blockers instead of the whole backlog — do not merge the two lists again. Status is irrelevant to whether an issue blocks: <em>Fixed</em> still has to pass QA and ship, so only the release date matters. An empty release date means TBD (to be defined) and ranks after every real date, so a cell that holds a TBD ticket cannot show a resolution date and reads “Resolution date TBD” instead of “All resolved by DD/MM/YYYY”. An issue applies to a cell when its country list contains the country and its mode or service list contains the column. <strong>DMS rule:</strong> DMS is stored literally in the sheet but is not a column here, because every operation mode requires it, so an issue whose mode is DMS is expanded to all operation modes (constant <code>DMS_BLOCKS_CELLS</code> in the code, set to true; setting it to false would instead treat DMS issues as a cross-cutting note). Issues with no mode or service cannot be placed in any cell and appear in the issues table only.</p>
+
+        <p><strong>Country status.</strong> One table, two rows per country plus a regional pair: <em>Standalone</em> covers clients using the Standalone mode and <em>Integrated</em> covers clients using Cloud Sync, Cloud Async, App to App Sync or App to App Async; a client using both is counted in both rows, so the two rows can add up to more than the country total. Clients in production, in integration and pipeline split by segment; transactions, TPV and approval rate are ⏳ awaiting data, and show “–” where the segment has no clients at all rather than a marker, because there is nothing to measure. “Operation modes live” and “Services live” require at least one client <em>in production</em>, not just integrating, and the regional row shows the union of everything live in any country. When the approval rate arrives, the regional figure is weighted by transactions.</p>
+
+        <p><strong>Release status.</strong> Days to production = production shipping date minus first delivery date, in calendar days. First-pass approval = tickets approved on the first review ÷ total tickets. Average time to production averages those days over the releases listed, with the release-candidate versus hotfix split shown in the KPI note. Shipping to production does not imply a per-terminal deployment status.</p>
+
+        <p><strong>Open data gaps and assumptions.</strong> Transaction, TPV, MID and approval columns are empty, as described above. The <code>Clientes</code> tab lists Justo once per country since 2026-09-11, but the Mexico and Colombia rows have no operation mode or service, so this report assumes both mirror Justo Chile (App to App Sync; Charge, Refunds, Other Services) — replace the assumption once the sheet is filled. K1-304 lists all four countries while its title mentions Mexico only; it is reported as all four. The five tickets with no date carry an empty cell in the sheet instead of the literal “TBD”, and are read as TBD here.</p>
+      </div>
+    </details>
+  </main>
+
+  <footer>Kushki ONE · Internal report</footer>
+
+  <script>
+  /* ================================================================
+     DATA BLOCK — loaded from the spreadsheet (Clientes gid 0, Pipeline,
+     Issues gid 1543440227, releases gid 130905531). Read 11/09/2026.
+     Modes: Standalone | Cloud Sync | Cloud Async | App to App Sync | App to App Async
+     ================================================================ */
+  const CH = "Charge", PC = "Preauth & Capture", RF = "Refunds", OS = "Other Services";
+  const ALL4 = [CH, PC, RF, OS];
+  const SA = "Standalone", CSY = "Cloud Sync", CAS = "Cloud Async", ASY = "App to App Sync", AAS = "App to App Async";
+  const DMS = "DMS";
+  const PROD = "Production", INT = "Integration", CHU = "Churned", PIPE = "Pipeline";
+  const ALL_C = ["Chile", "Mexico", "Peru", "Colombia"];
+
+  const REPORT_DATA = {
+    clients: [
+      // ---------- Chile ----------
+      { name:"Sipos", status:PROD, description:"Point of sale software for liquor stores and minimarkets", country:"Chile", integrations:[ASY], services:[CH, OS] },
+      { name:"TAS", status:PROD, description:"Electronic invoicing", country:"Chile", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Muffin", status:PROD, description:"Point of sale software for minimarkets, restaurants, street markets and other small businesses", country:"Chile", integrations:[ASY], services:[CH, RF] },
+      { name:"Colegium (Pay C)", status:PROD, description:"Management software for schools and educational institutions", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"PASA MARKET SPA", status:PROD, description:"PASA MARKET SPA", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"Servicios de Cortinas Roller (Kushki 1 pilot)", status:PROD, description:"Roller blind services (Kushki 1 pilot)", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"Emmanuel Barber Shop Spa (KSK 1 pilot)", status:PROD, description:"Barber shop and spa (KSK 1 pilot)", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"Gelatería Firenze", status:PROD, description:"Ice cream shop", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"APIPAY", status:PROD, description:"APIPAY", country:"Chile", integrations:[SA], services:[CH, RF] },
+      { name:"Hasar", status:INT, description:"Point of sale software and acquirer connection agent", country:"Chile", integrations:[CAS], services:[CH, RF, OS] },
+      { name:"EasyCancha", status:INT, description:"Sports court booking software", country:"Chile", integrations:[CSY], services:[CH, RF, OS] },
+      { name:"Justo", status:INT, description:"Restaurant and delivery software", country:"Chile", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"SurPay", status:INT, description:"Point of sale software for supermarkets", country:"Chile", integrations:[CSY], services:[CH, RF] },
+
+      // ---------- Mexico ----------
+      { name:"A LA BURGER (Central de Alianzas)", status:PROD, description:"A LA BURGER (Central de Alianzas)", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"El Rinconcito Comida Mexicana", status:PROD, description:"Mexican food restaurant", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Cleanton Polanco", status:PROD, description:"Cleanton Polanco", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Raku cafe", status:PROD, description:"Coffee shop", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Expertos de la Belleza Estética del Centro (Kushki One pilot)", status:PROD, description:"Beauty and aesthetics services (Kushki One pilot)", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Mal Vicho", status:PROD, description:"Mal Vicho", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      // Justo Mexico has no mode/service in the sheet — assumed to mirror Justo Chile.
+      { name:"Justo", status:INT, description:"Restaurant and delivery software (mode and services assumed, mirroring Justo Chile)", country:"Mexico", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Wareland", status:INT, description:"Software for service stations (convenience stores)", country:"Mexico", integrations:[ASY], services:[CH, PC, RF, OS] },
+      { name:"Vira Doctores", status:INT, description:"Healthcare software", country:"Mexico", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Cirsa", status:INT, description:"Point of sale software for casinos", country:"Mexico", integrations:[SA], services:[CH, RF] },
+      { name:"Finsus (COPA TIMON event)", status:INT, description:"Requires 25 terminals (21 K1 Standalone, 4 billpocket)", country:"Mexico", integrations:[SA], services:[CH, RF, OS] },
+
+      // ---------- Colombia ----------
+      { name:"Peluquería Two B - Hair & Beauty", status:PROD, description:"Hair salon", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"LOS MURILLO AS S.A.S.", status:PROD, description:"LOS MURILLO AS S.A.S.", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"Cafetería Kafi (CP - COL pilot)", status:PROD, description:"Coffee shop (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"VIRGLASS (CP - COL pilot)", status:PROD, description:"VIRGLASS (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"IAIA CARMIÑA SAS (CP - COL pilot)", status:PROD, description:"IAIA CARMIÑA SAS (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"IMPACTA LIDERES CON PROPÓSITO SAS (CP - COL pilot)", status:PROD, description:"IMPACTA LIDERES CON PROPÓSITO SAS (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"AZAI NATURA S.A.S. (CP - COL pilot)", status:PROD, description:"AZAI NATURA S.A.S. (CP - COL pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"Plaza Principal SAS (KS1 pilot)", status:PROD, description:"Plaza Principal SAS (KS1 pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"Moshpit - Cristian Salinas (KS1 pilot)", status:PROD, description:"Moshpit - Cristian Salinas (KS1 pilot)", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"SANROQUE SPA AND WELLNESS FOR PETS", status:PROD, description:"Pet spa and wellness", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      { name:"El Taller Orgánico", status:PROD, description:"Organic food store", country:"Colombia", integrations:[SA], services:[CH, RF] },
+      // Justo Colombia has no mode/service in the sheet — assumed to mirror Justo Chile.
+      { name:"Justo", status:INT, description:"Restaurant and delivery software (mode and services assumed, mirroring Justo Chile)", country:"Colombia", integrations:[ASY], services:[CH, RF, OS] },
+      { name:"Mesa Pay", status:INT, description:"Point of sale software for restaurants", country:"Colombia", integrations:[CSY], services:[CH, RF, OS] },
+      { name:"SinMente", status:INT, description:"Software for nightclubs and bars", country:"Colombia", integrations:[ASY], services:[CH, PC, RF, OS] },
+
+      // ---------- Peru ----------
+      { name:"Vossa Salon de Belleza", status:PROD, description:"Beauty salon", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"BODY BALANCE SURCO (Kushki One pilot)", status:PROD, description:"Fitness studio (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"BODY BALANCE MIRAFLORES (Kushki One pilot)", status:PROD, description:"Fitness studio (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"PELUQUERIA MANOS Y TIJERAS (Kushki One pilot)", status:PROD, description:"Hair salon (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"RESTAURANTE MARAPARTE (Kushki One pilot)", status:PROD, description:"Restaurant (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+      { name:"Fresh It (Kushki One pilot)", status:CHU, description:"Fresh It (Kushki One pilot)", country:"Peru", integrations:[SA], services:[CH, RF] },
+
+      // ---------- Pipeline ----------
+      { name:"Fintoc", status:PIPE, description:"Standalone solution for retail clients", country:"Chile", integrations:[SA, ASY], services:ALL4 },
+      { name:"Fintoc", status:PIPE, description:"Standalone solution for retail clients", country:"Peru", integrations:[SA, ASY], services:ALL4 },
+      { name:"GNew (Partner)", status:PIPE, description:"Partner; needs a cloud solution for self-service kiosks and an inventory app on the terminal", country:"Mexico", integrations:[SA, ASY, CSY], services:ALL4 },
+      { name:"Trade TRD (Partner)", status:PIPE, description:"Partner; needs a self-service solution for KFC (Cloud terminal)", country:"Peru", integrations:[ASY, CSY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Chile", integrations:[SA, ASY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Peru", integrations:[SA, ASY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Mexico", integrations:[SA, ASY], services:ALL4 },
+      { name:"Yuno (Partner)", status:PIPE, description:"Partner; needs App to App first and then CP API, will build their own payment app", country:"Colombia", integrations:[SA, ASY], services:ALL4 },
+      { name:"RedPontis (Qubit)", status:PIPE, description:"Partner; distribution for self-service kiosks", country:"Peru", integrations:[CSY], services:ALL4 },
+      { name:"Partner Bsale", status:PIPE, description:"Transport solution with K1 terminals", country:"Chile", integrations:[SA, ASY], services:ALL4 },
+      { name:"Viva Air MX", status:PIPE, description:"Airport solution plus onboard payments", country:"Mexico", integrations:[SA, ASY, CSY], services:ALL4 },
+      { name:"Friendlypos", status:PIPE, description:"App to App solution, Sipos-like", country:"Chile", integrations:[ASY], services:ALL4 },
+      { name:"Metriax", status:PIPE, description:"App to App solution, Sipos-like", country:"Chile", integrations:[ASY], services:ALL4 }
+    ],
+
+    /* Issues tab, verbatim scope. deliveryDate is ISO or null (null = TBD).
+       Criticality: Urgent | High | Medium. Only High and above are reported. */
+    issues: [
+      { id:"K1-306", title:"Async without transaction reference", description:"Regression: transaction_reference missing on async endpoints (charge, authorization); present in v0.27.0, absent in v0.30.13",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"Urgent", status:"Fixed", modes:[CAS, AAS], services:[CH, PC, RF, OS] },
+      { id:"K1-308", title:"Reauth does not respect the tax breakdown", description:"With tax enabled in DMS only subtotal_iva0 is sent on Standalone, and with amount 0 on HTTP/Cloud",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"Urgent", status:"Fixed", modes:[CSY, ASY], services:[PC] },
+      { id:"K1-286", title:"Application update pull from the terminal", description:"Provides a simpler way to update applications on the terminals",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"Urgent", status:"Fixed", modes:[DMS], services:[] },
+      { id:"K1-298", title:"Void with Installments enabled does not return TER-004", description:"With the Installments flag enabled in DMS the request hangs ~1m42s and answers MQTT_REQUEST_FAILED (Cloud and HTTP)",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"High", status:"Fixed", modes:[CSY, ASY], services:[CH] },
+      { id:"K1-301", title:"Tip and Installments screens allow navigating to Standalone", description:"With Return to Calling Application = ON the keypad is locked and the user can still navigate to Standalone",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"High", status:"Fixed", modes:[CSY, CAS, ASY, AAS], services:[CH, PC, RF, OS] },
+      { id:"K1-302", title:"Clicking the Kushki logo navigates to Standalone", description:"After a charge through the API, the logo in the top left corner leads to Standalone",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"High", status:"Fixed", modes:[SA, CSY, CAS, ASY, AAS], services:[CH] },
+      { id:"K1-235", title:"Payment application branding", description:"KCR-053: client colours and logo in the payment application",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"Medium", status:"Fixed", modes:[SA, CSY, CAS, ASY, AAS], services:[CH, PC, RF, OS] },
+      { id:"K1-281", title:"Terminal internal clock out of sync", description:"KB-325: ~1h39m drift producing wrong timestamps on receipts",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"Medium", status:"Fixed", modes:[SA, CSY, CAS, ASY, AAS], services:[CH] },
+      { id:"K1-311", title:"K-One version label in the GUI", description:"Show the application version in the interface so it can be identified easily",
+        deliveryDate:"2026-09-15", countries:ALL_C, criticality:"Medium", status:"Fixed", modes:[DMS], services:[] },
+      { id:"K1-295", title:"Split payments", description:"Support for split payments",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"High", status:"In progress", modes:[SA], services:[CH] },
+      { id:"K1-296", title:"LoggerSDK: improvements and optimisations", description:"Improvements and optimisations of the LoggerSDK",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"High", status:"In progress", modes:[SA, CSY, CAS, ASY, AAS], services:[CH, PC, RF, OS] },
+      { id:"K1-307", title:"Async webhooks with 9 defects", description:"Re-test KCR023: format, missing fields and inconsistent states (build 0.30.13)",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"High", status:"In progress", modes:[CAS, AAS], services:[CH] },
+      { id:"K1-294", title:"Confusing message when the terminal is offline", description:"The message shown does not explain that the terminal lost connection",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"Medium", status:"To do", modes:[SA, CSY, CAS, ASY, AAS], services:[CH, PC, RF, OS] },
+      { id:"K1-299", title:"Online search fails on the Cloud integration", description:"Works on HTTP; on Cloud the request hangs ~1m12s and answers MQTT_REQUEST_FAILED",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"Medium", status:"To do", modes:[CSY, CAS], services:[OS] },
+      { id:"K1-304", title:"Installments (Meses Sin Intereses) answers MQTT_REQUEST_FAILED", description:"Fails on Cloud/HTTP when using Meses Sin Intereses in Mexico (sheet reports all four countries)",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"Medium", status:"To do", modes:[CSY, CAS], services:[CH] },
+      { id:"K1-305", title:"Tip with installments is included in the deferred amount", description:"On a sale with tip plus installments the voucher includes the tip in the deferred amount",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"Medium", status:"To do", modes:[SA], services:[CH] },
+      { id:"K1-316", title:"KStore closes when the language is changed", description:"P2/P3: KStore closes after changing the language in Payrillium Store Config",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"Medium", status:"To do", modes:[ASY, AAS, CSY, CAS, DMS, SA], services:[OS] },
+      { id:"K1-297", title:"Error message exposes library data", description:"The error message shows data from the KushkiOne / Payrillium libraries",
+        deliveryDate:"2026-09-25", countries:ALL_C, criticality:"Medium", status:"To do", modes:[AAS, CSY, CAS], services:[] },
+      { id:"K1-138", title:"Retry with a different entry mode", description:"Contactless amount limit message; retrying with a different entry mode is missing",
+        deliveryDate:null, countries:["Mexico"], criticality:"High", status:"In progress", modes:[SA], services:[CH] },
+      { id:"K1-187", title:"Authorization returns offline denial", description:"Happens on HTTP, Cloud Sync and Cloud Async",
+        deliveryDate:null, countries:["Mexico"], criticality:"High", status:"In progress", modes:[SA, CSY, CAS, ASY, AAS], services:[CH] },
+      { id:"K1-263", title:"Adjustment on the terminal activation screen", description:"Pending adjustment on the activation screen",
+        deliveryDate:null, countries:ALL_C, criticality:"High", status:"Being discussed", modes:[DMS], services:[] },
+      { id:"K1-321", title:"Corrupted data crashes the application", description:"K-One crashes when it finds corrupted data",
+        deliveryDate:null, countries:ALL_C, criticality:"High", status:"To do", modes:[SA, CSY, CAS, ASY, AAS], services:[] },
+      { id:"K1-319", title:"K-Store shows the K-Engine Landi app on a Sunmi terminal", description:"Happens in UAT",
+        deliveryDate:null, countries:ALL_C, criticality:"Medium", status:"To do", modes:[], services:[] }
+    ],
+
+    releases: [
+      { firstDelivery:"21/08/2026", type:"Release Candidate", productionDate:"07/09/2026", tickets:23, approvedFirstReview:17, status:"Shipped to production", daysToProduction:17 },
+      { firstDelivery:"03/09/2026", type:"Release Candidate", productionDate:"07/09/2026", tickets:10, approvedFirstReview:9, status:"Shipped to production", daysToProduction:4 },
+      { firstDelivery:"31/08/2026", type:"Hotfix", productionDate:"02/09/2026", tickets:3, approvedFirstReview:3, status:"Shipped to production", daysToProduction:2 },
+      { firstDelivery:"07/09/2026", type:"Hotfix", productionDate:"08/09/2026", tickets:1, approvedFirstReview:1, status:"Shipped to production", daysToProduction:1 }
+    ]
+  };
+
+  const COUNTRIES = ["Mexico", "Chile", "Colombia", "Peru"];
+  const MODES = [SA, CSY, CAS, ASY, AAS];
+  const SERVICES = [CH, PC, RF, OS];
+  const READY_MODES = [SA, CSY, CAS, ASY];   // App to App Async excluded on purpose
+  const READY_SERVICES = [CH, PC, RF, OS];
+  const TX_THRESHOLD = 200;
+  /* No transaction data yet: criterion 2 is assumed met and flagged with an hourglass. */
+  const TX_ASSUMED = true;
+  /* DMS is required by every operation mode, so a DMS issue is applied to all of them. */
+  const DMS_BLOCKS_CELLS = true;
+  /* Critical = immediate or urgent. These are the only ones that block a readiness
+     cell (criterion 3) and the ones counted in the "open critical issues" KPI. */
+  const CRITICAL = ["Immediate", "Urgent"];
+  /* Reported in the issues section for information: critical plus high. High issues
+     never stop a country × mode / service from being approved. */
+  const REPORTED = ["Immediate", "Urgent", "High"];
+
+  const esc = v => String(v ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[c]);
+  const pct = x => (100 * x).toFixed(0) + "%";
+  const nf = n => n.toLocaleString("en-US");
+  const fmtISO = iso => { const [y, m, d] = iso.split("-"); return d + "/" + m + "/" + y; };
+  const AWAIT = '<span class="await">⏳ Awaiting data</span>';
+  const AWAIT_SM = '<span class="await await-sm">⏳ Awaiting data</span>';
+  const NOTHING = '<span style="color:var(--muted)">–</span>';
+
+  /* ==================== ISSUE SCOPE ====================
+     Critical = High, Urgent or Immediate. Status is irrelevant: "Fixed" still
+     has to pass QA and ship. deliveryDate null = TBD, which ranks after every
+     real date. A DMS issue is expanded to all operation modes. */
+  const criticalIssues = () => REPORT_DATA.issues.filter(i => CRITICAL.includes(i.criticality));
+  const reportedIssues = () => REPORT_DATA.issues.filter(i => REPORTED.includes(i.criticality));
+  const modesOf = issue => (DMS_BLOCKS_CELLS && issue.modes.includes(DMS))
+    ? MODES.slice()
+    : issue.modes.filter(m => m !== DMS);
+  /* Cells are only blocked by critical (immediate or urgent) issues. */
+  const issuesFor = (country, column, byService) => criticalIssues().filter(i =>
+    i.countries.includes(country) && (byService ? i.services.includes(column) : modesOf(i).includes(column)));
+  /* Latest release date of a list; null when any ticket is TBD. */
+  const lastResolution = issues => {
+    if (!issues.length) return null;
+    if (issues.some(i => !i.deliveryDate)) return null;
+    return issues.map(i => i.deliveryDate).sort().slice(-1)[0];
+  };
+  const resolutionText = issues => {
+    const last = lastResolution(issues);
+    return last ? "all resolved by " + fmtISO(last) : "resolution date TBD";
+  };
+
+  const ICON = { green:"✓", amber:"!", red:"✕", none:"⊘" };
+  const STATE_LABEL = {
+    green: "Ready — all three criteria met",
+    amber: "Partial — at least one criterion not met",
+    red: "Not ready — critical issues, or no criteria met",
+    none: "Not started — no clients in integration or production"
+  };
+
+  function clientCounts(country, column, byService) {
+    const rows = REPORT_DATA.clients.filter(m => m.country === country &&
+      (byService ? m.services.includes(column) : m.integrations.includes(column)));
+    const uniq = list => new Set(list.map(m => m.name)).size;
+    return {
+      prod: uniq(rows.filter(m => m.status === PROD)),
+      integrating: uniq(rows.filter(m => m.status === INT)),
+      pipeline: uniq(rows.filter(m => m.status === PIPE))
+    };
+  }
+
+  function evaluate(cfg, country, column) {
+    const issues = issuesFor(country, column, cfg.byService);
+    const c = clientCounts(country, column, cfg.byService);
+    const d = { ...c, issues };
+    const active = d.prod + d.integrating;
+    if (!active) return { state:"none", d, active, issues, c1:false, c2:TX_ASSUMED, c3:issues.length === 0 };
+    const c1 = d.prod >= 1, c2 = TX_ASSUMED, c3 = issues.length === 0;
+    const met = [c1, c2, c3].filter(Boolean).length;
+    const state = issues.length ? "red" : met === 3 ? "green" : met === 0 ? "red" : "amber";
+    return { state, d, active, issues, c1, c2, c3 };
+  }
+
+  /* Every reason that keeps a cell out of the green state, one short line each. */
+  function cellReasons(r) {
+    const out = [];
+    /* Only the count and the resolution date here — the ticket list lives in the
+       detail panel that opens when the cell is clicked. */
+    if (r.issues.length) out.push({ head:true, text: r.issues.length + " issue" +
+      (r.issues.length === 1 ? "" : "s") + " — " + resolutionText(r.issues) });
+    if (!r.c1) out.push({ head:true, text:"No clients in production" });
+    if (!TX_ASSUMED && !r.c2) out.push({ head:true, text:"Low transactions" });
+    return out;
+  }
+
+  function renderMatrix(cfg) {
+    const panelId = cfg.root + "Detail";
+    const rows = COUNTRIES.map(country => "<tr><td>" + esc(country) + "</td>" +
+      cfg.columns.map(column => {
+        const r = evaluate(cfg, country, column);
+        const label = country + " · " + column + " — " + STATE_LABEL[r.state];
+        const reasons = (r.state === "red" || r.state === "amber") ? cellReasons(r) : [];
+        return '<td class="cell">' + '<button type="button" class="dot ' + r.state + '" data-country="' + esc(country) +
+          '" data-column="' + esc(column) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '">' +
+          ICON[r.state] + "</button>" +
+          (reasons.length ? '<div class="cell-reasons">' + reasons.map(t =>
+            '<span class="' + (t.head ? "reason-head" : "reason-issue") + '">' + esc(t.text) + "</span>").join("") + "</div>" : "") +
+          "</td>";
+      }).join("") + "</tr>").join("");
+
+    document.getElementById(cfg.root).innerHTML =
+      '<div class="section-head"><div><h2>' + esc(cfg.title) + "</h2><p>Readiness of each " + cfg.unit +
+      " per country, judged on three criteria: at least one client in production with that " + cfg.unit + ", at least " +
+      TX_THRESHOLD + " transactions across those clients in the last week, and no critical issue open for that country and " +
+      cfg.unit + ". Critical means immediate or urgent; high issues are reported in the issues section but do not block a cell.</p></div></div>" +
+      '<article class="card matrix-card"><div class="matrix-note" style="border-radius:0;border-bottom:1px solid var(--line)">' +
+      "⏳ There is no weekly transaction data yet, so the transaction criterion is <strong>assumed met</strong> in every cell." +
+      (cfg.byService ? "" : " One critical issue sits on DMS (K1-286), which every operation mode depends on, so it applies to all modes.") +
+      '</div><div class="table-scroll"><table class="cov-table"><thead><tr><th>Country</th>' +
+      cfg.columns.map(c => "<th>" + esc(c) + "</th>").join("") + "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
+      '<div class="legend">' + ["green","amber","red","none"].map(s =>
+        '<span class="k"><span class="dot ' + s + '">' + ICON[s] + "</span>" + esc(STATE_LABEL[s]) + "</span>").join("") +
+      "</div></article>" +
+      '<article class="card detail" id="' + panelId + '"><div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div></article>';
+
+    const clear = () => document.getElementById(panelId).innerHTML =
+      '<div class="placeholder">Select a cell in the matrix to see clients, transactions and issues behind it.</div>';
+
+    document.querySelectorAll("#" + cfg.root + " button.dot").forEach(btn => btn.addEventListener("click", () => {
+      document.querySelectorAll("#" + cfg.root + " button.dot").forEach(b => b.classList.remove("is-selected"));
+      btn.classList.add("is-selected");
+      renderReadinessDetail(cfg, panelId, btn.dataset.country, btn.dataset.column, clear);
+    }));
+  }
+
+  function renderReadinessDetail(cfg, panelId, country, column, clear) {
+    const r = evaluate(cfg, country, column), d = r.d, issues = r.issues;
+    const mark = (kind, text) => '<li><b class="' + kind + '">' + (kind === "ok" ? "✓" : kind === "no" ? "✕" : "⏳") +
+      "</b><span>" + text + "</span></li>";
+    document.getElementById(panelId).innerHTML =
+      '<div class="detail-head"><div class="detail-title">' + esc(country) + " · " + esc(column) + "</div>" +
+      '<div style="display:flex;align-items:center;gap:12px"><span class="dot ' + r.state + '" style="cursor:default">' + ICON[r.state] + "</span>" +
+      '<button type="button" class="detail-close">Close</button></div></div>' +
+      '<div class="detail-grid">' +
+      '<div class="detail-cell"><div class="detail-label">Clients in production + integration</div><div class="detail-value">' + r.active +
+      '</div><div class="detail-sub">' + d.prod + " in production · " + d.integrating + " integrating</div></div>" +
+      '<div class="detail-cell"><div class="detail-label">Clients in pipeline</div><div class="detail-value">' + d.pipeline +
+      '</div><div class="detail-sub">Not counted for readiness</div></div>' +
+      '<div class="detail-cell"><div class="detail-label">Transactions last week</div><div class="detail-value" style="font-size:15px">' + AWAIT +
+      '</div><div class="detail-sub">Threshold ' + nf(TX_THRESHOLD) + " · assumed met</div></div>" +
+      '<div class="detail-cell"><div class="detail-label">Critical issues</div><div class="detail-value">' + issues.length +
+      '</div><div class="detail-sub">' + (issues.length ? resolutionText(issues).replace(/^a/, "A").replace(/^r/, "R") : "None open") + "</div></div></div>" +
+      (issues.length ? '<div class="issue-block"><strong>' + issues.length + " critical issue" + (issues.length === 1 ? "" : "s") +
+        " affecting this " + cfg.unit + " in " + esc(country) + " — " + resolutionText(issues) +
+        (lastResolution(issues) ? " (date the last ticket ships)." : " (at least one ticket has no release date yet).") +
+        "</strong><ul>" +
+        issues.slice().sort((a, b) => (a.deliveryDate || "9999").localeCompare(b.deliveryDate || "9999"))
+          .map(i => "<li><strong>" + esc(i.id) + " · " + esc(i.title) + "</strong> — " + esc(i.criticality) +
+            ", status " + esc(i.status) + ", " +
+            (i.deliveryDate ? "ships on " + fmtISO(i.deliveryDate) : "release date TBD") +
+            (DMS_BLOCKS_CELLS && i.modes.includes(DMS) ? " (DMS, applies to all operation modes)" : "") + "</li>").join("") + "</ul></div>" : "") +
+      '<ul class="criteria">' +
+      mark(r.c1 ? "ok" : "no", r.c1
+        ? "At least one client in production with this " + cfg.unit + " — " + d.prod + " in production"
+        : "No clients in production with this " + cfg.unit + " — " + d.integrating + " integrating") +
+      mark("wait", "Transactions assumed sufficient — no volume data loaded yet") +
+      mark(r.c3 ? "ok" : "no", r.c3
+        ? "No critical issues for this country and " + cfg.unit + " (high issues do not block)"
+        : issues.length + " critical issue" + (issues.length === 1 ? "" : "s") + " open for this country and " +
+          cfg.unit + " — " + resolutionText(issues)) + "</ul>";
+    document.querySelector("#" + panelId + " .detail-close").addEventListener("click", () => {
+      document.querySelectorAll("#" + cfg.root + " button.dot").forEach(b => b.classList.remove("is-selected"));
+      clear();
+    });
+  }
+
+  const MODE_MATRIX = { root:"readinessByMode", title:"Product readiness by operation mode", unit:"operation mode",
+    columns: READY_MODES, byService: false };
+  const SERVICE_MATRIX = { root:"readinessByService", title:"Product readiness by service", unit:"service",
+    columns: READY_SERVICES, byService: true };
+  /* Status breakdown of a list of issues, in the order the statuses appear in the tab. */
+  const byStatus = list => {
+    const order = [];
+    list.forEach(i => { if (!order.includes(i.status)) order.push(i.status); });
+    return order.map(s => list.filter(i => i.status === s).length + " " + s.toLowerCase()).join(", ");
+  };
+
+  function renderCountryStatus() {
+    /* country = null → regional union of everything live in any country */
+    const liveTags = (country, list, byService) => {
+      const on = list.filter(col => REPORT_DATA.clients.some(m => (country ? m.country === country : true) &&
+        m.status === PROD && (byService ? m.services : m.integrations).includes(col)));
+      return on.length
+        ? '<div class="tags">' + on.map(c => '<span class="integration-tag">' + esc(c) + "</span>").join("") + "</div>"
+        : '<span style="color:var(--muted)">None yet</span>';
+    };
+    /* Two segments per country: Standalone clients and Integrated clients (any mode
+       other than Standalone). A client using both is counted in both segments. */
+    const inSegment = (m, seg) => seg === "Standalone"
+      ? m.integrations.includes(SA)
+      : m.integrations.some(i => i !== SA);
+    const count = (country, status, seg) => new Set(REPORT_DATA.clients
+      .filter(m => (country ? m.country === country : true) && m.status === status && inSegment(m, seg))
+      .map(m => m.name)).size;
+    /* Volume columns have no source yet: hourglass where there are clients to measure,
+       a plain dash where the segment has nothing live or integrating. */
+    const volume = (country, seg) => (count(country, PROD, seg) + count(country, INT, seg)) ? AWAIT_SM : NOTHING;
+
+    const segRows = (label, country, cls) => ["Standalone", "Integrated"].map((seg, i) =>
+      '<tr class="' + cls + (i ? " seg-second" : "") + '">' +
+      (i ? "" : '<td rowspan="2">' + esc(label) + "</td>") +
+      '<td class="seg">' + seg + "</td>" +
+      '<td class="num">' + count(country, PROD, seg) + "</td>" +
+      '<td class="num">' + count(country, INT, seg) + "</td>" +
+      '<td class="num">' + count(country, PIPE, seg) + "</td>" +
+      '<td class="num">' + volume(country, seg) + "</td>" +
+      '<td class="num">' + volume(country, seg) + "</td>" +
+      '<td class="num">' + volume(country, seg) + "</td>" +
+      (i ? "" : '<td rowspan="2">' + liveTags(country, MODES, false) + "</td>" +
+        '<td rowspan="2">' + liveTags(country, SERVICES, true) + "</td>") +
+      "</tr>").join("");
+
+    document.getElementById("countryStatus").innerHTML =
+      '<div class="section-head"><div><h2>Country status</h2><p>Clients, weekly volume and what is actually live in each country, ' +
+      'split between Standalone clients and integrated clients (any operation mode other than Standalone). ' +
+      'Operation modes and services are listed only when at least one client in production uses them.</p></div></div>' +
+      '<article class="card matrix-card"><div class="table-scroll"><table class="status-table"><thead><tr>' +
+      "<th>Country</th><th>Segment</th><th>Clients in production</th><th>In integration</th><th>Pipeline</th>" +
+      "<th>Transactions last week</th><th>TPV last week</th><th>Approval rate</th><th>Operation modes live</th><th>Services live</th>" +
+      "</tr></thead><tbody>" + COUNTRIES.map(c => segRows(c, c, "")).join("") +
+      segRows("Regional", null, "cov-total") + "</tbody></table></div>" +
+      '<div class="matrix-note" style="border-radius:0;border-top:1px solid var(--line);border-bottom:0">' +
+      "Standalone covers clients using the Standalone mode; Integrated covers clients using Cloud Sync, Cloud Async, App to App Sync or App to App Async. " +
+      "A client using both is counted in both segments, so the two rows can add up to more than the country total. Client figures are unique client names " +
+      "per country; in the regional rows a client present in several countries counts once, and the modes and services listed are the union of everything " +
+      "live in any country. ⏳ Transactions, TPV and approval rate have no source loaded yet; a dash means the segment has no clients in production or " +
+      "integration, so there is nothing to measure. Modes and services live require at least one client in production, not just integrating.</div></article>";
+  }
+
+  function renderReleases() {
+    const R = REPORT_DATA.releases;
+    const totalTickets = R.reduce((n, r) => n + r.tickets, 0);
+    const totalApproved = R.reduce((n, r) => n + r.approvedFirstReview, 0);
+    document.getElementById("releaseSection").innerHTML =
+      '<div class="section-head"><div><h2>Release status</h2><p>Delivery, production shipping and first-review results.</p></div></div>' +
+      '<article class="card matrix-card"><div class="table-scroll"><table><thead><tr><th>Release type</th><th>First delivery</th><th>Shipped to production</th><th>Days to production</th><th>Status</th><th>Tickets</th><th>Approved on first review</th><th>First-pass approval</th></tr></thead><tbody>' +
+      R.map(r => '<tr><td><span class="integration-tag">' + esc(r.type) + "</span></td><td>" + esc(r.firstDelivery) + "</td><td>" + esc(r.productionDate) +
+        '</td><td style="' + (r.daysToProduction < 0 ? "color:#b42318" : "") + '">' + r.daysToProduction + "</td><td>" + esc(r.status) + "</td><td>" + r.tickets + "</td><td>" + r.approvedFirstReview +
+        "</td><td>" + (100 * r.approvedFirstReview / r.tickets).toFixed(1) + "%</td></tr>").join("") +
+      '</tbody></table></div><div class="matrix-note" style="border-radius:0">Days to production = shipping date minus first delivery date (calendar days). First-pass approval = tickets approved on the first review / total tickets. Total: ' +
+      totalTickets + " tickets; " + totalApproved + " approved on first review (" + (100 * totalApproved / totalTickets).toFixed(1) + "%). Shipping to production does not imply a per-terminal deployment status.</div></article>";
+  }
+
+  const tags = (values, cls = "") => values.length
+    ? '<div class="tags">' + values.map(v => '<span class="tag ' + cls + '">' + esc(v) + "</span>").join("") + "</div>"
+    : '<span style="color:var(--muted)">–</span>';
+
+  function renderIssues() {
+    const list = reportedIssues().slice().sort((a, b) =>
+      REPORTED.indexOf(a.criticality) - REPORTED.indexOf(b.criticality) ||
+      (a.deliveryDate || "9999").localeCompare(b.deliveryDate || "9999"));
+    const crit = list.filter(i => CRITICAL.includes(i.criticality)).length;
+    const others = REPORT_DATA.issues.length - list.length;
+    document.getElementById("issueCount").textContent = `${crit} critical · ${list.length - crit} high`;
+    const critList = list.filter(i => CRITICAL.includes(i.criticality));
+    const highList = list.filter(i => !CRITICAL.includes(i.criticality));
+    const tbd = list.filter(i => !i.deliveryDate).length;
+    document.getElementById("issueScopeNote").textContent =
+      `Critical by status: ${byStatus(critList) || "none open"}. High by status: ${byStatus(highList) || "none open"}. ` +
+      `${tbd} of the ${list.length} still have no release date. ${others} medium tickets in the tracker are out of scope for this report.`;
+    const tbody = document.getElementById("issueRows");
+    if (!list.length) {
+      tbody.innerHTML = '<tr><td colspan="7"><div class="empty"><strong>No issues to show</strong>There are no open critical issues at this cut-off date.</div></td></tr>';
+      return;
+    }
+    tbody.innerHTML = list.map(issue => '<tr>' +
+      '<td class="issue-title"><div class="issue-id">' + esc(issue.id) + "</div>" + esc(issue.title) +
+      '<p style="font-weight:400;font-size:12px;color:var(--muted)">' + esc(issue.description) + "</p></td>" +
+      '<td><span class="tag crit-' + (CRITICAL.includes(issue.criticality) ? "urgent" : "high") + '">' + esc(issue.criticality) + "</span></td>" +
+      "<td>" + esc(issue.status) + "</td>" +
+      "<td>" + (issue.deliveryDate ? fmtISO(issue.deliveryDate) : '<span class="tag tbd">TBD</span>') + "</td>" +
+      "<td>" + tags(issue.countries, "country") + "</td>" +
+      '<td><div class="tags">' + issue.modes.map(m => '<span class="tag' + (m === DMS ? " dms" : "") + '">' + esc(m) + "</span>").join("") +
+      (issue.modes.length ? "" : '<span style="color:var(--muted)">–</span>') + "</div></td>" +
+      "<td>" + tags(issue.services, "service") + "</td></tr>").join("");
+  }
+
+  renderMatrix(MODE_MATRIX);
+  renderMatrix(SERVICE_MATRIX);
+  renderCountryStatus();
+  renderReleases();
+  renderIssues();
+  </script>
+
+</body></html>
